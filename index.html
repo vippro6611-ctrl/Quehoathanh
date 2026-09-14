@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="vi" class="dark">
 <head>
@@ -18,6 +17,7 @@
                             purple: '#8b5cf6',
                             cyan: '#06b6d4',
                             gold: '#f59e0b',
+                            pink: '#ec4899',
                             dark: '#030712'
                         }
                     },
@@ -26,31 +26,31 @@
                         display: ['Outfit', 'sans-serif']
                     },
                     animation: {
-                        'aura-spin': 'auraRotate 8s linear infinite',
-                        'aura-pulse': 'auraPulse 3s ease-in-out infinite alternate',
-                        'float': 'float 4s ease-in-out infinite',
-                        'shimmer': 'shimmer 2.5s infinite',
-                        'glow-pulse': 'glowPulse 2s infinite alternate'
+                        'aura-spin': 'auraRotate 7s linear infinite',
+                        'float': 'float 3.5s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite alternate',
+                        'hyper-pulse': 'hyperPulse 0.8s ease-in-out infinite alternate'
                     },
                     keyframes: {
                         auraRotate: {
                             '0%': { transform: 'rotate(0deg)' },
                             '100%': { transform: 'rotate(360deg)' }
                         },
-                        auraPulse: {
-                            '0%': { boxShadow: '0 0 25px rgba(139, 92, 246, 0.5), 0 0 50px rgba(6, 182, 212, 0.3)' },
-                            '100%': { boxShadow: '0 0 60px rgba(139, 92, 246, 0.9), 0 0 100px rgba(245, 158, 11, 0.6)' }
-                        },
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' }
+                            '50%': { transform: 'translateY(-12px)' }
                         },
                         shimmer: {
                             '100%': { transform: 'translateX(100%)' }
                         },
-                        glowPulse: {
-                            '0%': { opacity: '0.6', filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.6))' },
-                            '100%': { opacity: '1', filter: 'drop-shadow(0 0 20px rgba(56, 189, 248, 0.9))' }
+                        pulseGlow: {
+                            '0%': { filter: 'drop-shadow(0 0 15px rgba(139, 92, 246, 0.5))' },
+                            '100%': { filter: 'drop-shadow(0 0 35px rgba(6, 182, 212, 0.9))' }
+                        },
+                        hyperPulse: {
+                            '0%': { transform: 'scale(1)', boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' },
+                            '100%': { transform: 'scale(1.02)', boxShadow: '0 0 45px rgba(245, 158, 11, 0.8)' }
                         }
                     }
                 }
@@ -58,7 +58,6 @@
         }
     </script>
 
-    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -70,19 +69,20 @@
             background-color: #030712;
             color: #f3f4f6;
             user-select: none;
+            overflow-x: hidden;
         }
 
         /* Animated Aura Gradient Text */
         .aura-text-gradient {
-            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 50%, #fbbf24 100%);
-            background-size: 200% auto;
+            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 40%, #fbbf24 80%, #ec4899 100%);
+            background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: textShine 4s linear infinite alternate;
         }
 
         .meoww-text-gradient {
-            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+            background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #38bdf8 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -96,18 +96,25 @@
 
         /* Glassmorphic Container */
         .glass-aura-card {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 45px rgba(139, 92, 246, 0.25);
         }
 
-        /* Neon Aura Glow Frame */
+        /* Story Codex Glass Container */
+        .story-codex-card {
+            background: linear-gradient(145deg, rgba(24, 16, 45, 0.9), rgba(11, 15, 29, 0.95));
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Animated Aura Ring around Photo Container */
         .aura-wrapper {
             position: relative;
             border-radius: 2rem;
-            padding: 5px;
+            padding: 6px;
         }
 
         .aura-wrapper::before {
@@ -115,10 +122,10 @@
             position: absolute;
             inset: -6px;
             border-radius: 2.3rem;
-            background: linear-gradient(45deg, #8b5cf6, #06b6d4, #f59e0b, #ec4899, #8b5cf6);
+            background: linear-gradient(45deg, #8b5cf6, #06b6d4, #f59e0b, #ec4899, #38bdf8, #8b5cf6);
             background-size: 400% 400%;
             z-index: -1;
-            animation: auraGradient 6s ease infinite, auraGlow 3s ease-in-out infinite alternate;
+            animation: auraGradient 5s ease infinite, auraGlow 2.5s ease-in-out infinite alternate;
         }
 
         @keyframes auraGradient {
@@ -129,176 +136,236 @@
 
         @keyframes auraGlow {
             0% { filter: blur(14px) opacity(0.75); }
-            100% { filter: blur(28px) opacity(1); }
-        }
-
-        /* Counter Widget Glow Box */
-        .aura-counter-box {
-            background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(15, 23, 42, 0.9));
-            border: 1px solid rgba(6, 182, 212, 0.4);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-        }
-
-        /* Dynamic Floating Text (+1 Aura!) */
-        .floating-aura-text {
-            position: fixed;
-            pointer-events: none;
-            font-weight: 900;
-            font-size: 1.25rem;
-            color: #fbbf24;
-            text-shadow: 0 0 10px #f59e0b, 0 0 20px #8b5cf6;
-            z-index: 100;
-            animation: floatUpAndFade 1s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
-        }
-
-        @keyframes floatUpAndFade {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, 0) scale(0.8);
-            }
-            50% {
-                transform: translate(-50%, -40px) scale(1.3);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -80px) scale(1);
-            }
+            100% { filter: blur(30px) opacity(1); }
         }
 
         /* Screen Shake Effect */
         .shake-effect {
-            animation: screenShake 0.3s ease-in-out;
+            animation: screenShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
         }
 
         @keyframes screenShake {
-            0%, 100% { transform: translate(0, 0); }
-            20% { transform: translate(-4px, 2px); }
-            40% { transform: translate(4px, -2px); }
-            60% { transform: translate(-3px, -1px); }
-            80% { transform: translate(3px, 1px); }
+            10%, 90% { transform: translate3d(-3px, 1px, 0) scale(1.01); }
+            20%, 80% { transform: translate3d(4px, -3px, 0) scale(0.99); }
+            30%, 50%, 70% { transform: translate3d(-5px, 4px, 0) scale(1.02); }
+            40%, 60% { transform: translate3d(5px, -4px, 0) scale(1); }
+        }
+
+        /* Mega Shake Effect for big boosts */
+        .mega-shake-effect {
+            animation: megaShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes megaShake {
+            10%, 90% { transform: translate3d(-8px, 4px, 0) scale(1.03); }
+            20%, 80% { transform: translate3d(9px, -6px, 0) scale(0.97); }
+            30%, 50%, 70% { transform: translate3d(-10px, 8px, 0) scale(1.04); }
+            40%, 60% { transform: translate3d(10px, -8px, 0) scale(0.98); }
+        }
+
+        /* Photo Shockwave Flash Ring */
+        .shockwave-flash::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.8rem;
+            border: 4px solid #f59e0b;
+            opacity: 0;
+            pointer-events: none;
+            animation: shockwavePulse 0.5s ease-out;
+        }
+
+        @keyframes shockwavePulse {
+            0% { transform: scale(0.95); opacity: 1; border-color: #38bdf8; }
+            50% { transform: scale(1.15); opacity: 0.8; border-color: #f59e0b; }
+            100% { transform: scale(1.35); opacity: 0; border-color: #ec4899; }
+        }
+
+        /* Dynamic Floating Combat Text (+1 Aura!) */
+        .floating-aura-text {
+            position: fixed;
+            pointer-events: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #fbbf24;
+            text-shadow: 0 0 12px #f59e0b, 0 0 25px #8b5cf6, 0 0 35px #ec4899;
+            z-index: 1000;
+            animation: floatUpAndBurst 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+        }
+
+        @keyframes floatUpAndBurst {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 0) scale(0.5) rotate(-5deg);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -25px) scale(1.4) rotate(3deg);
+            }
+            70% {
+                opacity: 1;
+                transform: translate(-50%, -65px) scale(1.1) rotate(-2deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -105px) scale(0.8) rotate(5deg);
+            }
+        }
+
+        /* Counter Widget Styling */
+        .aura-counter-box {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.85), rgba(15, 23, 42, 0.95));
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.25);
+        }
+
+        .counter-bump {
+            animation: counterBump 0.25s ease-out;
+        }
+
+        @keyframes counterBump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); color: #f59e0b; }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
-<body class="min-h-screen relative flex flex-col items-center justify-between overflow-x-hidden p-4 sm:p-6 md:p-10">
+<body class="min-h-screen relative flex flex-col items-center justify-between p-4 sm:p-6 md:p-10">
 
-    <!-- Canvas Particle Background -->
+    <!-- Interactive Canvas Particle Background -->
     <canvas id="aura-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <!-- Background Ambient Orbs -->
+    <!-- Background Ambient Glow Orbs -->
     <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
-    <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/20 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
-    <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/25 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
+    <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-    <!-- Main Card Container -->
+    <!-- Main Glass Showcase Card Container -->
     <main id="main-card" class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-6 sm:p-10 md:p-12 my-auto transition-all duration-300">
         
-        <!-- Top Crown Badge -->
+        <!-- Header Crown Badge -->
         <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-bold tracking-widest uppercase shadow-lg shadow-purple-950/50 animate-float">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-purple-500/50 text-purple-300 text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-lg shadow-purple-950/60 animate-float">
                 <i class="fa-solid fa-crown text-amber-400 text-base animate-bounce"></i>
-                <span class="aura-text-gradient font-extrabold">AURA OVER 9000</span>
+                <span class="aura-text-gradient font-black">AURA OVER 9000</span>
                 <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
             </div>
         </div>
 
-        <!-- Hero Grid: Photo (Left) & Intro Details (Right) -->
+        <!-- Grid: Left Image & Right Details -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             
-            <!-- Image Column (Left - Red Circle Area) -->
+            <!-- Photo Column -->
             <div class="md:col-span-5 flex flex-col items-center">
-                <div class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group cursor-pointer" onclick="triggerAuraBurst(event)">
-                    <div class="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-950 relative">
+                <div id="photo-container" class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group cursor-pointer transition-transform duration-300 active:scale-95" onclick="triggerAuraBurst(event, 1)">
+                    <div class="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-950 relative flex items-center justify-center">
+                        
+                        <!-- Primary User Photo (1000154590_3.jpg with fallback chain) -->
                         <img 
-                            src="1000154590.jpg" 
+                            id="duong-photo"
+                            src="1000154590_3.jpg" 
                             alt="Dương - Aura Bá Khí" 
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                            onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/8b5cf6?text=D%C6%B0%C6%A1ng+Aura';"
+                            onerror="handlePhotoError(this)"
                         >
-                        <!-- Dark Vignette Overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-70"></div>
+
+                        <!-- Fallback Vector Artwork (Shows automatically if image file path isn't local) -->
+                        <div id="photo-fallback" class="hidden absolute inset-0 bg-gradient-to-br from-purple-950 via-slate-900 to-cyan-950 flex flex-col items-center justify-center p-6 text-center">
+                            <div class="w-20 h-20 rounded-full bg-purple-500/20 border-2 border-purple-400/50 flex items-center justify-center text-amber-400 text-4xl mb-3 animate-pulse">
+                                <i class="fa-solid fa-whiskey-glass"></i>
+                            </div>
+                            <h3 class="font-display font-black text-xl text-purple-200 tracking-wider">DƯƠNG AURA</h3>
+                            <p class="text-xs text-cyan-400 font-semibold mt-1">Chill & Bá Khí</p>
+                        </div>
                         
-                        <!-- Floating Badge on Photo -->
-                        <div class="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 px-3.5 py-2 rounded-xl flex items-center justify-between text-xs">
-                            <span class="text-slate-300 font-medium flex items-center gap-1.5">
-                                <i class="fa-solid fa-whiskey-glass text-amber-400"></i> Chill & Power
+                        <!-- Dark Vignette Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        
+                        <!-- Floating Badges Over Photo -->
+                        <div class="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-purple-500/40 px-3.5 py-2 rounded-xl flex items-center justify-between text-xs pointer-events-none">
+                            <span class="text-slate-200 font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-glass-water text-cyan-400 animate-pulse"></i> Chill & Power
                             </span>
-                            <span class="text-cyan-400 font-bold tracking-wider">MAX POWER</span>
+                            <span class="text-amber-400 font-black tracking-wider flex items-center gap-1">
+                                <i class="fa-solid fa-bolt"></i> MAX POWER
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Content Column (Right) -->
+            <!-- Details Column -->
             <div class="md:col-span-7 space-y-5 text-center md:text-left">
                 
-                <!-- Main Name & Subtitle -->
+                <!-- Main Title & Badge -->
                 <div>
                     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-3">
-                        DƯƠNG
+                        <span class="aura-text-gradient">DƯƠNG</span>
                     </h1>
-                    <div class="inline-block px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300 text-sm font-semibold tracking-wider">
+                    <div class="inline-block px-3.5 py-1 rounded-lg bg-purple-500/15 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-bold tracking-wider uppercase shadow-inner">
                         ⚡ Aura Bá Khí
                     </div>
                 </div>
 
                 <!-- Epic Tagline -->
-                <p class="text-xs sm:text-sm font-bold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
-                    <i class="fa-solid fa-bolt text-amber-400"></i>
-                    <span>PHONG THÁI ĐỈNH CAO - AURA ÁP ĐẢO - THẦN THÁI NGÚT NGÀN</span>
+                <p class="text-xs sm:text-sm font-extrabold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-bolt-lightning text-amber-400 text-sm animate-bounce"></i>
+                    <span>PHONG THÁI ĐỈNH CÁO – AURA ÁP ĐẢO – THẦN THÁI NGÚT NGÀN</span>
                 </p>
 
-                <!-- Detailed Quote -->
-                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80 backdrop-blur-sm">
-                    "Dương - người sở hữu <span class="text-purple-300 font-semibold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình, khí chất lãnh đạo và sự tự tin không thể nhầm lẫn."
+                <!-- Persona Quote / Description -->
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium bg-slate-950/60 p-4 rounded-2xl border border-purple-500/20 backdrop-blur-sm shadow-inner">
+                    "Dương - người sở hữu <span class="text-purple-300 font-bold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình, khí chất lãnh đạo và sự tự tin không thể nhầm lẫn."
                 </p>
 
                 <!-- Stats Grid -->
-                <div class="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
-                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-purple-500/80">
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1">
+                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-purple-500/80 hover:bg-slate-900">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Aura Bá Khí</div>
-                        <div class="text-base sm:text-lg font-black text-purple-400 flex items-center justify-center gap-1">
+                        <div class="text-sm sm:text-base font-black text-purple-400 flex items-center justify-center gap-1">
                             <span>100%</span>
-                            <span class="text-[9px] bg-purple-500/20 text-purple-300 px-1 py-0.5 rounded font-semibold">MAX</span>
+                            <span class="text-[9px] bg-purple-500/30 text-purple-300 px-1 py-0.5 rounded font-bold">MAX</span>
                         </div>
                     </div>
 
-                    <div class="bg-slate-900/80 border border-cyan-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-cyan-500/80">
+                    <div class="bg-slate-900/80 border border-cyan-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-cyan-500/80 hover:bg-slate-900">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Thần Thái</div>
                         <div class="text-sm sm:text-base font-black text-cyan-300 mt-1">Đỉnh Cao</div>
                     </div>
 
-                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-amber-500/80">
+                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-amber-500/80 hover:bg-slate-900">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Phong Thái</div>
-                        <div class="text-[11px] sm:text-xs font-extrabold text-amber-300 mt-1">Điềm Tĩnh & Cuốn Hút</div>
+                        <div class="text-[11px] sm:text-xs font-black text-amber-300 mt-1">Điềm Tĩnh</div>
                     </div>
                 </div>
 
                 <!-- Interactive Action & Counter Bar -->
                 <div class="pt-3 flex flex-wrap items-center justify-center md:justify-start gap-4">
                     
-                    <!-- Burst Button -->
+                    <!-- Bộc Phá Aura Button -->
                     <button 
                         id="burst-btn" 
-                        onclick="triggerAuraBurst(event)" 
-                        class="relative group overflow-hidden px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-600/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
+                        onclick="triggerAuraBurst(event, 1)" 
+                        class="relative group overflow-hidden px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-black text-xs sm:text-sm tracking-widest uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-500/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
                     >
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-base group-hover:rotate-45 transition-transform duration-300"></i>
                         <span>Bộc Phát Aura</span>
                         
-                        <!-- Shimmer effect -->
-                        <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:animate-shimmer"></div>
+                        <!-- Shimmer animation overlay -->
+                        <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shimmer"></div>
                     </button>
 
-                    <!-- Aura Counter Widget (Blue Circle Area) -->
+                    <!-- Aura Counter Widget -->
                     <div class="aura-counter-box px-5 py-2.5 rounded-2xl flex items-center gap-3 transition-all duration-300">
-                        <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-amber-400 text-sm animate-pulse">
+                        <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-amber-400 text-base animate-pulse">
                             <i class="fa-solid fa-fire-flame-curved"></i>
                         </div>
                         <div class="text-left">
-                            <div class="text-[10px] text-cyan-300 font-bold tracking-wider uppercase">Điểm Aura Bá Khí</div>
+                            <div class="text-[10px] text-cyan-300 font-extrabold tracking-wider uppercase">Điểm Aura Bá Khí</div>
                             <div class="text-lg font-black text-white flex items-center gap-1.5">
-                                <span id="aura-count" class="aura-text-gradient text-xl">9,000</span>
-                                <span class="text-[10px] font-bold text-slate-400">AP</span>
+                                <span id="aura-count" class="aura-text-gradient text-xl font-black">9,000</span>
+                                <span class="text-[10px] font-bold text-slate-400 uppercase">AP</span>
                             </div>
                         </div>
                     </div>
@@ -309,29 +376,147 @@
 
         </div>
 
+        <!-- Interactive Legendary Story Section: Sử Thi Ngụm Nước Vũ Trụ -->
+        <section class="mt-10 pt-8 border-t border-purple-500/30">
+            <div class="story-codex-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+                <!-- Background Glowing Emblem -->
+                <div class="absolute -right-8 -bottom-8 opacity-10 text-amber-400 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-scroll"></i>
+                </div>
+
+                <!-- Story Header -->
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 text-lg shadow-lg">
+                        <i class="fa-solid fa-book-journal-whills"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-black text-lg sm:text-xl text-amber-300 uppercase tracking-wider flex items-center gap-2">
+                            <span>SỬ THI BÁ KHÍ: NGỤM NƯỚC VŨ TRỤ</span>
+                            <i class="fa-solid fa-sparkles text-amber-400 text-sm animate-pulse"></i>
+                        </h2>
+                        <p class="text-xs text-purple-300 font-medium">Truyền thuyết về khoảnh khắc Dương thức tỉnh aura chấn động tam giới</p>
+                    </div>
+                </div>
+
+                <!-- Narrative Text -->
+                <div class="space-y-3 text-slate-300 text-xs sm:text-sm leading-relaxed font-normal bg-slate-950/70 p-4 sm:p-5 rounded-xl border border-amber-500/20 backdrop-blur-md">
+                    <p class="first-letter:text-3xl first-letter:font-black first-letter:text-amber-400 first-letter:float-left first-letter:mr-2">
+                        Tương truyền vào một chiều bình dị, khi vạn vật đang chìm vào tĩnh lặng, <strong class="text-cyan-300 font-extrabold">Dương</strong> từ từ nâng chiếc cốc giấy lên. Không cần dùng đến binh khí hay thần chú, chỉ bằng một ngụm nước nhẹ nhàng, luồng <strong class="text-purple-300 font-extrabold">Aura Bá Khí</strong> bùng nổ vượt ngưỡng 9000 AP!
+                    </p>
+                    <p>
+                        Không khí xung quanh lập tức biến đổi: thời gian như dừng lại, các nguyên tố hội tụ, thần thái điềm tĩnh đến mức làm tan biến mọi thị phi. Đó không chỉ là uống nước – đó là khoảnh khắc <span class="text-amber-300 font-bold">Dương nạp năng lượng thống trị vũ trụ!</span>
+                    </p>
+                </div>
+
+                <!-- Story Action Boost Buttons -->
+                <div class="mt-5 flex flex-wrap items-center justify-between gap-3 bg-slate-900/80 p-3.5 rounded-xl border border-purple-500/30">
+                    <div class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400"></i>
+                        <span>Tiếp sức Bá Khí cho Dương:</span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button 
+                            onclick="triggerStoryBoost(event, 100)" 
+                            class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-700 to-cyan-600 text-white font-extrabold text-xs tracking-wider uppercase shadow-md hover:scale-105 active:scale-95 transition cursor-pointer flex items-center gap-1.5 border border-purple-400/40"
+                        >
+                            <i class="fa-solid fa-atom text-cyan-300 animate-spin"></i>
+                            <span>Truyền Năng Lượng (+100 AP)</span>
+                        </button>
+                        <button 
+                            onclick="triggerStoryBoost(event, 500)" 
+                            class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-pink-600 to-purple-600 text-white font-black text-xs tracking-wider uppercase shadow-lg shadow-amber-950/50 hover:scale-105 active:scale-95 transition cursor-pointer flex items-center gap-1.5 border border-amber-400/50"
+                        >
+                            <i class="fa-solid fa-fire text-amber-200 animate-bounce"></i>
+                            <span>Tôn Vinh Bá Khí (+500 AP)</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
-    <!-- Footer Section -->
+    <!-- Footer Section with "Web By Meoww" Badge -->
     <footer class="relative z-10 w-full max-w-4xl mt-8 pt-4 pb-2 border-t border-slate-800/80 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-        <div class="flex items-center gap-2">
-            <span class="text-slate-400 font-medium">© 2026 DƯƠNG • Supreme Vibe & Aura</span>
+        <div class="flex items-center gap-2 text-slate-400 font-medium">
+            <span>© 2026 DƯƠNG • Supreme Vibe & Aura</span>
         </div>
         
         <!-- Web By Meoww Signature Banner -->
-        <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-pink-500/40 shadow-lg shadow-pink-950/40">
-            <i class="fa-solid fa-cat text-pink-400 animate-bounce"></i>
-            <span class="meoww-text-gradient font-extrabold tracking-wider text-sm">Web By Meoww</span>
+        <div class="flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-pink-500/50 shadow-lg shadow-pink-950/50 hover:border-pink-400 transition-all duration-300">
+            <i class="fa-solid fa-cat text-pink-400 text-base animate-bounce"></i>
+            <span class="meoww-text-gradient font-black tracking-widest text-sm uppercase">Web By Meoww</span>
             <i class="fa-solid fa-sparkles text-amber-400 text-xs"></i>
         </div>
 
-        <div class="text-purple-400 font-semibold flex items-center gap-1.5">
+        <div class="text-purple-400 font-bold flex items-center gap-1.5">
             <i class="fa-solid fa-shield-halved text-cyan-400"></i> Absolute Presence
         </div>
     </footer>
 
-    <!-- Interactive Canvas & Aura Burst Scripts -->
     <script>
-        // Canvas Particle System
+        function handlePhotoError(imgElement) {
+            imgElement.style.display = 'none';
+            const fallbackEl = document.getElementById('photo-fallback');
+            if (fallbackEl) {
+                fallbackEl.classList.remove('hidden');
+            }
+        }
+
+        let audioCtx = null;
+
+        function playAuraBurstSound(multiplier = 1) {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+                const duration = multiplier > 1 ? 0.6 : 0.35;
+
+                // 1. Sub Bass Boom Oscillator
+                const subOsc = audioCtx.createOscillator();
+                const subGain = audioCtx.createGain();
+                subOsc.type = 'sine';
+                subOsc.frequency.setValueAtTime(multiplier > 1 ? 240 : 160, now);
+                subOsc.frequency.exponentialRampToValueAtTime(30, now + duration);
+                subGain.gain.setValueAtTime(multiplier > 1 ? 0.7 : 0.45, now);
+                subGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+                subOsc.connect(subGain);
+                subGain.connect(audioCtx.destination);
+                subOsc.start(now);
+                subOsc.stop(now + duration);
+
+                // 2. Power Sweep Synth
+                const sweepOsc = audioCtx.createOscillator();
+                const sweepGain = audioCtx.createGain();
+                sweepOsc.type = multiplier > 100 ? 'sawtooth' : 'triangle';
+                sweepOsc.frequency.setValueAtTime(200, now);
+                sweepOsc.frequency.exponentialRampToValueAtTime(multiplier > 100 ? 1400 : 880, now + (duration * 0.8));
+                
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(400, now);
+                filter.frequency.exponentialRampToValueAtTime(4000, now + (duration * 0.8));
+
+                sweepGain.gain.setValueAtTime(0.3, now);
+                sweepGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+                sweepOsc.connect(filter);
+                filter.connect(sweepGain);
+                sweepGain.connect(audioCtx.destination);
+                sweepOsc.start(now);
+                sweepOsc.stop(now + duration);
+
+            } catch (e) {
+                // Silent fallback if audio context restricted by browser
+            }
+        }
+
         const canvas = document.getElementById('aura-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -343,31 +528,32 @@
         window.addEventListener('resize', resizeCanvas);
 
         const particles = [];
-        const particleColors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#38bdf8'];
+        const particleColors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#38bdf8', '#fbbf24'];
 
         class Particle {
-            constructor(x, y, isBurst = false) {
+            constructor(x, y, isBurst = false, intensity = 1) {
                 this.isBurst = isBurst;
+                this.intensity = intensity;
                 this.reset(x, y);
             }
 
             reset(x, y) {
                 this.x = x !== undefined ? x : Math.random() * canvas.width;
                 this.y = y !== undefined ? y : Math.random() * canvas.height;
-                this.radius = this.isBurst ? Math.random() * 4 + 2 : Math.random() * 3 + 1;
+                this.radius = this.isBurst ? Math.random() * (4 * this.intensity) + 2 : Math.random() * 2.5 + 1;
                 this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
                 
                 if (this.isBurst) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 7 + 2;
+                    const speed = (Math.random() * 8 + 3) * Math.min(this.intensity, 2);
                     this.vx = Math.cos(angle) * speed;
                     this.vy = Math.sin(angle) * speed;
                     this.alpha = 1;
                     this.decay = Math.random() * 0.03 + 0.015;
                 } else {
                     this.vx = (Math.random() - 0.5) * 0.6;
-                    this.vy = (Math.random() - 0.8) * 0.7; // Float upwards
-                    this.alpha = Math.random() * 0.6 + 0.2;
+                    this.vy = (Math.random() - 0.8) * 0.7;
+                    this.alpha = Math.random() * 0.5 + 0.2;
                     this.decay = Math.random() * 0.003 + 0.001;
                 }
             }
@@ -379,7 +565,7 @@
 
                 if (this.alpha <= 0) {
                     if (this.isBurst) {
-                        return false; // Remove burst particle
+                        return false;
                     } else {
                         this.reset();
                     }
@@ -400,8 +586,8 @@
             }
         }
 
-        // Ambient particles loop
-        for (let i = 0; i < 70; i++) {
+        // Initialize ambient drifting background particles
+        for (let i = 0; i < 75; i++) {
             particles.push(new Particle());
         }
 
@@ -417,48 +603,80 @@
             }
             requestAnimationFrame(animateCanvas);
         }
-
         animateCanvas();
 
-        // Aura Counter State & Interaction
         let currentAuraPoints = 9000;
         const counterElement = document.getElementById('aura-count');
         const mainCard = document.getElementById('main-card');
+        const photoContainer = document.getElementById('photo-container');
 
-        function triggerAuraBurst(event) {
-            // Increment Aura Points
-            currentAuraPoints += 1;
+        const combatPhrases = [
+            '+1 AURA! ⚡',
+            '⚡ BÁ KHÍ +1000!',
+            '🔥 OVERPOWERED!',
+            '✨ PHONG THÁI MAX!',
+            '💥 SUPREME VIBE!'
+        ];
+
+        function triggerAuraBurst(event, amount = 1) {
+            playAuraBurstSound(amount > 1 ? 2 : 1);
+
+            // Update counter
+            currentAuraPoints += amount;
             counterElement.textContent = currentAuraPoints.toLocaleString();
 
-            // Trigger floating text near click point
+            // Counter Bump Effect
+            counterElement.classList.remove('counter-bump');
+            void counterElement.offsetWidth;
+            counterElement.classList.add('counter-bump');
+
+            // Locate click position
             const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
             const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
 
-            createFloatingText(clientX, clientY);
+            // Spawn floating combat text
+            createFloatingText(clientX, clientY, amount === 1 ? null : `+${amount} AURA! 🔥`);
 
-            // Spawn particle burst on canvas
-            for (let i = 0; i < 35; i++) {
-                particles.push(new Particle(clientX, clientY, true));
+            // Spawn explosive particles
+            const particleCount = amount > 100 ? 70 : 35;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(clientX, clientY, true, amount > 100 ? 1.5 : 1));
             }
 
-            // Card Shake & Aura Glow feedback
-            mainCard.classList.remove('shake-effect');
-            void mainCard.offsetWidth; // Force reflow
-            mainCard.classList.add('shake-effect');
+            // Screen Shake
+            const shakeClass = amount >= 500 ? 'mega-shake-effect' : 'shake-effect';
+            mainCard.classList.remove('shake-effect', 'mega-shake-effect');
+            void mainCard.offsetWidth;
+            mainCard.classList.add(shakeClass);
+
+            // Shockwave flash on photo frame
+            if (photoContainer) {
+                photoContainer.classList.remove('shockwave-flash');
+                void photoContainer.offsetWidth;
+                photoContainer.classList.add('shockwave-flash');
+            }
         }
 
-        function createFloatingText(x, y) {
+        function triggerStoryBoost(event, boostAmount) {
+            triggerAuraBurst(event, boostAmount);
+        }
+
+        function createFloatingText(x, y, customText = null) {
             const floatEl = document.createElement('div');
             floatEl.className = 'floating-aura-text';
-            floatEl.textContent = '+1 Aura! ⚡';
-            floatEl.style.left = `${x}px`;
+            
+            const phrase = customText || combatPhrases[Math.floor(Math.random() * combatPhrases.length)];
+            floatEl.textContent = phrase;
+
+            const offsetX = (Math.random() - 0.5) * 40;
+            floatEl.style.left = `${x + offsetX}px`;
             floatEl.style.top = `${y}px`;
 
             document.body.appendChild(floatEl);
 
             setTimeout(() => {
                 floatEl.remove();
-            }, 1000);
+            }, 1200);
         }
     </script>
 </body>
