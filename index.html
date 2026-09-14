@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="vi" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DƯƠNG | Aura Bá Khí</title>
+    <title>DƯƠNG | Aura Bá Khí • Web By Meoww</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,7 +29,8 @@
                         'aura-spin': 'auraRotate 8s linear infinite',
                         'aura-pulse': 'auraPulse 3s ease-in-out infinite alternate',
                         'float': 'float 4s ease-in-out infinite',
-                        'shimmer': 'shimmer 2.5s infinite'
+                        'shimmer': 'shimmer 2.5s infinite',
+                        'glow-pulse': 'glowPulse 2s infinite alternate'
                     },
                     keyframes: {
                         auraRotate: {
@@ -41,10 +43,14 @@
                         },
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-12px)' }
+                            '50%': { transform: 'translateY(-10px)' }
                         },
                         shimmer: {
                             '100%': { transform: 'translateX(100%)' }
+                        },
+                        glowPulse: {
+                            '0%': { opacity: '0.6', filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.6))' },
+                            '100%': { opacity: '1', filter: 'drop-shadow(0 0 20px rgba(56, 189, 248, 0.9))' }
                         }
                     }
                 }
@@ -52,11 +58,10 @@
         }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -64,6 +69,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #030712;
             color: #f3f4f6;
+            user-select: none;
         }
 
         /* Animated Aura Gradient Text */
@@ -75,21 +81,29 @@
             animation: textShine 4s linear infinite alternate;
         }
 
+        .meoww-text-gradient {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 3s linear infinite alternate;
+        }
+
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
 
-        /* Glassmorphism Container */
+        /* Glassmorphic Container */
         .glass-aura-card {
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
         }
 
-        /* Multilayer Glowing Aura Border for Image */
+        /* Neon Aura Glow Frame */
         .aura-wrapper {
             position: relative;
             border-radius: 2rem;
@@ -100,7 +114,7 @@
             content: '';
             position: absolute;
             inset: -6px;
-            border-radius: 2.2rem;
+            border-radius: 2.3rem;
             background: linear-gradient(45deg, #8b5cf6, #06b6d4, #f59e0b, #ec4899, #8b5cf6);
             background-size: 400% 400%;
             z-index: -1;
@@ -114,51 +128,85 @@
         }
 
         @keyframes auraGlow {
-            0% { filter: blur(12px) opacity(0.7); }
-            100% { filter: blur(25px) opacity(1); }
+            0% { filter: blur(14px) opacity(0.75); }
+            100% { filter: blur(28px) opacity(1); }
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Counter Widget Glow Box */
+        .aura-counter-box {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
         }
-        ::-webkit-scrollbar-track {
-            background: #030712;
+
+        /* Dynamic Floating Text (+1 Aura!) */
+        .floating-aura-text {
+            position: fixed;
+            pointer-events: none;
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: #fbbf24;
+            text-shadow: 0 0 10px #f59e0b, 0 0 20px #8b5cf6;
+            z-index: 100;
+            animation: floatUpAndFade 1s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #8b5cf6;
-            border-radius: 9999px;
+
+        @keyframes floatUpAndFade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, 0) scale(0.8);
+            }
+            50% {
+                transform: translate(-50%, -40px) scale(1.3);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -80px) scale(1);
+            }
+        }
+
+        /* Screen Shake Effect */
+        .shake-effect {
+            animation: screenShake 0.3s ease-in-out;
+        }
+
+        @keyframes screenShake {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-4px, 2px); }
+            40% { transform: translate(4px, -2px); }
+            60% { transform: translate(-3px, -1px); }
+            80% { transform: translate(3px, 1px); }
         }
     </style>
 </head>
-<body class="min-h-screen relative flex items-center justify-center overflow-x-hidden p-4 sm:p-6 md:p-10">
+<body class="min-h-screen relative flex flex-col items-center justify-between overflow-x-hidden p-4 sm:p-6 md:p-10">
 
-    <!-- Background Canvas Particles -->
+    <!-- Canvas Particle Background -->
     <canvas id="aura-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <!-- Background Ambient Glow Orbs -->
+    <!-- Background Ambient Orbs -->
     <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/20 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/15 rounded-full blur-[120px] pointer-events-none"></div>
 
     <!-- Main Card Container -->
-    <main class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-6 sm:p-10 md:p-12 my-auto transition-all duration-500 hover:border-purple-500/50">
+    <main id="main-card" class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-6 sm:p-10 md:p-12 my-auto transition-all duration-300">
         
         <!-- Top Crown Badge -->
-        <div class="flex justify-center mb-8">
+        <div class="flex justify-center mb-6">
             <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-bold tracking-widest uppercase shadow-lg shadow-purple-950/50 animate-float">
                 <i class="fa-solid fa-crown text-amber-400 text-base animate-bounce"></i>
                 <span class="aura-text-gradient font-extrabold">AURA OVER 9000</span>
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
             </div>
         </div>
 
-        <!-- Hero Grid: Photo & Intro Details -->
+        <!-- Hero Grid: Photo (Left) & Intro Details (Right) -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             
-            <!-- Image Column (Left) -->
+            <!-- Image Column (Left - Red Circle Area) -->
             <div class="md:col-span-5 flex flex-col items-center">
-                <div class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group">
+                <div class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group cursor-pointer" onclick="triggerAuraBurst(event)">
                     <div class="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-950 relative">
                         <img 
                             src="1000154590.jpg" 
@@ -166,8 +214,8 @@
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                             onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/8b5cf6?text=D%C6%B0%C6%A1ng+Aura';"
                         >
-                        <!-- Dark Overlay Vignette -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60"></div>
+                        <!-- Dark Vignette Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-70"></div>
                         
                         <!-- Floating Badge on Photo -->
                         <div class="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 px-3.5 py-2 rounded-xl flex items-center justify-between text-xs">
@@ -181,9 +229,9 @@
             </div>
 
             <!-- Content Column (Right) -->
-            <div class="md:col-span-7 space-y-6 text-center md:text-left">
+            <div class="md:col-span-7 space-y-5 text-center md:text-left">
                 
-                <!-- Main Name & Aura Tag -->
+                <!-- Main Name & Subtitle -->
                 <div>
                     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-3">
                         DƯƠNG
@@ -194,70 +242,96 @@
                 </div>
 
                 <!-- Epic Tagline -->
-                <p class="text-sm sm:text-base font-bold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
+                <p class="text-xs sm:text-sm font-bold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
                     <i class="fa-solid fa-bolt text-amber-400"></i>
-                    <span>Phong Thái Đỉnh Cao - Aura Áp Đảo - Thần Thái Ngút Ngàn</span>
+                    <span>PHONG THÁI ĐỈNH CAO - AURA ÁP ĐẢO - THẦN THÁI NGÚT NGÀN</span>
                 </p>
 
-                <!-- Detailed Description -->
-                <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-800/80 backdrop-blur-sm">
+                <!-- Detailed Quote -->
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80 backdrop-blur-sm">
                     "Dương - người sở hữu <span class="text-purple-300 font-semibold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình, khí chất lãnh đạo và sự tự tin không thể nhầm lẫn."
                 </p>
 
-                <!-- Aura Stats Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                    
-                    <!-- Stat Card 1 -->
-                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-2xl p-3.5 text-center transition hover:border-purple-500/80 hover:bg-slate-800/80">
-                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Aura Bá Khí</div>
-                        <div class="text-xl font-black text-purple-400 flex items-center justify-center gap-1">
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
+                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-purple-500/80">
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Aura Bá Khí</div>
+                        <div class="text-base sm:text-lg font-black text-purple-400 flex items-center justify-center gap-1">
                             <span>100%</span>
-                            <span class="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-semibold">MAX</span>
+                            <span class="text-[9px] bg-purple-500/20 text-purple-300 px-1 py-0.5 rounded font-semibold">MAX</span>
                         </div>
                     </div>
 
-                    <!-- Stat Card 2 -->
-                    <div class="bg-slate-900/80 border border-cyan-500/30 rounded-2xl p-3.5 text-center transition hover:border-cyan-500/80 hover:bg-slate-800/80">
-                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Thần Thái</div>
-                        <div class="text-lg font-black text-cyan-300">Đỉnh Cao</div>
+                    <div class="bg-slate-900/80 border border-cyan-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-cyan-500/80">
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Thần Thái</div>
+                        <div class="text-sm sm:text-base font-black text-cyan-300 mt-1">Đỉnh Cao</div>
                     </div>
 
-                    <!-- Stat Card 3 -->
-                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-2xl p-3.5 text-center transition hover:border-amber-500/80 hover:bg-slate-800/80">
-                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Phong Thái</div>
-                        <div class="text-xs sm:text-sm font-extrabold text-amber-300 mt-1">Điềm Tĩnh & Cuốn Hút</div>
+                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-amber-500/80">
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Phong Thái</div>
+                        <div class="text-[11px] sm:text-xs font-extrabold text-amber-300 mt-1">Điềm Tĩnh & Cuốn Hút</div>
                     </div>
-
                 </div>
 
-                <!-- Interactive Action Button -->
-                <div class="pt-2 flex justify-center md:justify-start">
-                    <button id="burst-btn" onclick="triggerAuraBurst()" class="relative group overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-extrabold text-sm tracking-wider uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-600/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-3">
-                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-lg group-hover:rotate-12 transition-transform"></i>
+                <!-- Interactive Action & Counter Bar -->
+                <div class="pt-3 flex flex-wrap items-center justify-center md:justify-start gap-4">
+                    
+                    <!-- Burst Button -->
+                    <button 
+                        id="burst-btn" 
+                        onclick="triggerAuraBurst(event)" 
+                        class="relative group overflow-hidden px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-600/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
+                    >
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-base group-hover:rotate-45 transition-transform duration-300"></i>
                         <span>Bộc Phát Aura</span>
                         
-                        <!-- Shimmer overlay effect -->
-                        <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shimmer"></div>
+                        <!-- Shimmer effect -->
+                        <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:animate-shimmer"></div>
                     </button>
+
+                    <!-- Aura Counter Widget (Blue Circle Area) -->
+                    <div class="aura-counter-box px-5 py-2.5 rounded-2xl flex items-center gap-3 transition-all duration-300">
+                        <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-amber-400 text-sm animate-pulse">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-[10px] text-cyan-300 font-bold tracking-wider uppercase">Điểm Aura Bá Khí</div>
+                            <div class="text-lg font-black text-white flex items-center gap-1.5">
+                                <span id="aura-count" class="aura-text-gradient text-xl">9,000</span>
+                                <span class="text-[10px] font-bold text-slate-400">AP</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-        <!-- Bottom Footer Credit -->
-        <footer class="mt-10 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <span>© 2026 DƯƠNG • Supreme Vibe & Aura</span>
-            <span class="text-purple-400 font-semibold flex items-center gap-1">
-                <i class="fa-solid fa-shield-halved text-cyan-400"></i> Absolute Presence
-            </span>
-        </footer>
-
     </main>
 
-    <!-- Scripts for Particle Effects & Interaction -->
+    <!-- Footer Section -->
+    <footer class="relative z-10 w-full max-w-4xl mt-8 pt-4 pb-2 border-t border-slate-800/80 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+            <span class="text-slate-400 font-medium">© 2026 DƯƠNG • Supreme Vibe & Aura</span>
+        </div>
+        
+        <!-- Web By Meoww Signature Banner -->
+        <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-pink-500/40 shadow-lg shadow-pink-950/40">
+            <i class="fa-solid fa-cat text-pink-400 animate-bounce"></i>
+            <span class="meoww-text-gradient font-extrabold tracking-wider text-sm">Web By Meoww</span>
+            <i class="fa-solid fa-sparkles text-amber-400 text-xs"></i>
+        </div>
+
+        <div class="text-purple-400 font-semibold flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved text-cyan-400"></i> Absolute Presence
+        </div>
+    </footer>
+
+    <!-- Interactive Canvas & Aura Burst Scripts -->
     <script>
-        // Background Aura Particle System
+        // Canvas Particle System
         const canvas = document.getElementById('aura-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -269,22 +343,33 @@
         window.addEventListener('resize', resizeCanvas);
 
         const particles = [];
-        const colors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899'];
+        const particleColors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#38bdf8'];
 
         class Particle {
-            constructor() {
-                this.reset();
+            constructor(x, y, isBurst = false) {
+                this.isBurst = isBurst;
+                this.reset(x, y);
             }
 
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 3 + 1;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.8) * 0.8; // Floating upwards
-                this.alpha = Math.random() * 0.6 + 0.2;
-                this.decay = Math.random() * 0.003 + 0.001;
+            reset(x, y) {
+                this.x = x !== undefined ? x : Math.random() * canvas.width;
+                this.y = y !== undefined ? y : Math.random() * canvas.height;
+                this.radius = this.isBurst ? Math.random() * 4 + 2 : Math.random() * 3 + 1;
+                this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                
+                if (this.isBurst) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 7 + 2;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.03 + 0.015;
+                } else {
+                    this.vx = (Math.random() - 0.5) * 0.6;
+                    this.vy = (Math.random() - 0.8) * 0.7; // Float upwards
+                    this.alpha = Math.random() * 0.6 + 0.2;
+                    this.decay = Math.random() * 0.003 + 0.001;
+                }
             }
 
             update() {
@@ -292,14 +377,19 @@
                 this.y += this.vy;
                 this.alpha -= this.decay;
 
-                if (this.alpha <= 0 || this.y < 0 || this.x < 0 || this.x > canvas.width) {
-                    this.reset();
+                if (this.alpha <= 0) {
+                    if (this.isBurst) {
+                        return false; // Remove burst particle
+                    } else {
+                        this.reset();
+                    }
                 }
+                return true;
             }
 
             draw() {
                 ctx.save();
-                ctx.globalAlpha = this.alpha;
+                ctx.globalAlpha = Math.max(0, this.alpha);
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
@@ -310,45 +400,65 @@
             }
         }
 
-        // Create particles
-        for (let i = 0; i < 60; i++) {
+        // Ambient particles loop
+        for (let i = 0; i < 70; i++) {
             particles.push(new Particle());
         }
 
-        function animateAura() {
+        function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateAura);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const alive = particles[i].update();
+                if (alive) {
+                    particles[i].draw();
+                } else {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(animateCanvas);
         }
 
-        animateAura();
+        animateCanvas();
 
-        // Aura Burst Interaction
-        function triggerAuraBurst() {
-            // Burst extra particles
-            for (let i = 0; i < 40; i++) {
-                const p = new Particle();
-                p.x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
-                p.y = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
-                p.radius = Math.random() * 5 + 2;
-                p.alpha = 1;
-                p.vx = (Math.random() - 0.5) * 6;
-                p.vy = (Math.random() - 0.5) * 6;
-                particles.push(p);
+        // Aura Counter State & Interaction
+        let currentAuraPoints = 9000;
+        const counterElement = document.getElementById('aura-count');
+        const mainCard = document.getElementById('main-card');
+
+        function triggerAuraBurst(event) {
+            // Increment Aura Points
+            currentAuraPoints += 1;
+            counterElement.textContent = currentAuraPoints.toLocaleString();
+
+            // Trigger floating text near click point
+            const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
+            const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
+
+            createFloatingText(clientX, clientY);
+
+            // Spawn particle burst on canvas
+            for (let i = 0; i < 35; i++) {
+                particles.push(new Particle(clientX, clientY, true));
             }
 
-            // Visual feedback on card
-            const card = document.querySelector('main');
-            card.classList.add('scale-[1.02]');
-            card.style.boxShadow = '0 0 100px rgba(139, 92, 246, 0.9), 0 0 150px rgba(6, 182, 212, 0.6)';
+            // Card Shake & Aura Glow feedback
+            mainCard.classList.remove('shake-effect');
+            void mainCard.offsetWidth; // Force reflow
+            mainCard.classList.add('shake-effect');
+        }
+
+        function createFloatingText(x, y) {
+            const floatEl = document.createElement('div');
+            floatEl.className = 'floating-aura-text';
+            floatEl.textContent = '+1 Aura! ⚡';
+            floatEl.style.left = `${x}px`;
+            floatEl.style.top = `${y}px`;
+
+            document.body.appendChild(floatEl);
 
             setTimeout(() => {
-                card.classList.remove('scale-[1.02]');
-                card.style.boxShadow = '';
-            }, 600);
+                floatEl.remove();
+            }, 1000);
         }
     </script>
 </body>
