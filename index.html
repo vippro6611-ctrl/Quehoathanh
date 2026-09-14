@@ -7,6 +7,7 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -18,6 +19,7 @@
                             cyan: '#06b6d4',
                             gold: '#f59e0b',
                             pink: '#ec4899',
+                            rose: '#f43f5e',
                             dark: '#030712'
                         }
                     },
@@ -30,7 +32,7 @@
                         'float': 'float 3.5s ease-in-out infinite',
                         'shimmer': 'shimmer 2s infinite',
                         'pulse-glow': 'pulseGlow 2s ease-in-out infinite alternate',
-                        'hyper-pulse': 'hyperPulse 0.8s ease-in-out infinite alternate'
+                        'level-bounce': 'levelBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
                     },
                     keyframes: {
                         auraRotate: {
@@ -48,9 +50,11 @@
                             '0%': { filter: 'drop-shadow(0 0 15px rgba(139, 92, 246, 0.5))' },
                             '100%': { filter: 'drop-shadow(0 0 35px rgba(6, 182, 212, 0.9))' }
                         },
-                        hyperPulse: {
-                            '0%': { transform: 'scale(1)', boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' },
-                            '100%': { transform: 'scale(1.02)', boxShadow: '0 0 45px rgba(245, 158, 11, 0.8)' }
+                        levelBounce: {
+                            '0%': { transform: 'scale(0.3) translateY(-50px)', opacity: '0' },
+                            '50%': { transform: 'scale(1.1) translateY(10px)', opacity: '1' },
+                            '70%': { transform: 'scale(0.95) translateY(-5px)' },
+                            '100%': { transform: 'scale(1) translateY(0)' }
                         }
                     }
                 }
@@ -72,9 +76,9 @@
             overflow-x: hidden;
         }
 
-        /* Animated Aura Gradient Text */
+        /* Dynamic Animated Text Gradients */
         .aura-text-gradient {
-            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 40%, #fbbf24 80%, #ec4899 100%);
+            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 35%, #fbbf24 70%, #ec4899 100%);
             background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -94,23 +98,28 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* Glassmorphic Container */
+        /* Glassmorphic Main Cards */
         .glass-aura-card {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.88);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 1px solid rgba(168, 85, 247, 0.35);
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 45px rgba(139, 92, 246, 0.25);
         }
 
-        /* Story Codex Glass Container */
         .story-codex-card {
-            background: linear-gradient(145deg, rgba(24, 16, 45, 0.9), rgba(11, 15, 29, 0.95));
+            background: linear-gradient(145deg, rgba(24, 16, 45, 0.92), rgba(11, 15, 29, 0.96));
             border: 1px solid rgba(245, 158, 11, 0.4);
             box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
         }
 
-        /* Animated Aura Ring around Photo Container */
+        .quiz-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.85));
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
+        }
+
+        /* RGB Dynamic Glow Frame around Photo */
         .aura-wrapper {
             position: relative;
             border-radius: 2rem;
@@ -122,7 +131,7 @@
             position: absolute;
             inset: -6px;
             border-radius: 2.3rem;
-            background: linear-gradient(45deg, #8b5cf6, #06b6d4, #f59e0b, #ec4899, #38bdf8, #8b5cf6);
+            background: linear-gradient(45deg, #8b5cf6, #06b6d4, #f59e0b, #ec4899, #f43f5e, #38bdf8, #8b5cf6);
             background-size: 400% 400%;
             z-index: -1;
             animation: auraGradient 5s ease infinite, auraGlow 2.5s ease-in-out infinite alternate;
@@ -136,34 +145,33 @@
 
         @keyframes auraGlow {
             0% { filter: blur(14px) opacity(0.75); }
-            100% { filter: blur(30px) opacity(1); }
+            100% { filter: blur(32px) opacity(1); }
         }
 
-        /* Screen Shake Effect */
+        /* Screen Shake Effects */
         .shake-effect {
-            animation: screenShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            animation: screenShake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
         }
 
         @keyframes screenShake {
-            10%, 90% { transform: translate3d(-3px, 1px, 0) scale(1.01); }
-            20%, 80% { transform: translate3d(4px, -3px, 0) scale(0.99); }
-            30%, 50%, 70% { transform: translate3d(-5px, 4px, 0) scale(1.02); }
-            40%, 60% { transform: translate3d(5px, -4px, 0) scale(1); }
+            10%, 90% { transform: translate3d(-2px, 1px, 0) scale(1.005); }
+            20%, 80% { transform: translate3d(3px, -2px, 0) scale(0.995); }
+            30%, 50%, 70% { transform: translate3d(-4px, 3px, 0) scale(1.01); }
+            40%, 60% { transform: translate3d(4px, -3px, 0) scale(1); }
         }
 
-        /* Mega Shake Effect for big boosts */
         .mega-shake-effect {
-            animation: megaShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            animation: megaShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
         }
 
         @keyframes megaShake {
-            10%, 90% { transform: translate3d(-8px, 4px, 0) scale(1.03); }
-            20%, 80% { transform: translate3d(9px, -6px, 0) scale(0.97); }
-            30%, 50%, 70% { transform: translate3d(-10px, 8px, 0) scale(1.04); }
-            40%, 60% { transform: translate3d(10px, -8px, 0) scale(0.98); }
+            10%, 90% { transform: translate3d(-7px, 4px, 0) scale(1.02); }
+            20%, 80% { transform: translate3d(8px, -5px, 0) scale(0.98); }
+            30%, 50%, 70% { transform: translate3d(-9px, 7px, 0) scale(1.03); }
+            40%, 60% { transform: translate3d(9px, -7px, 0) scale(0.99); }
         }
 
-        /* Photo Shockwave Flash Ring */
+        /* Shockwave pulse frame */
         .shockwave-flash::after {
             content: '';
             position: absolute;
@@ -181,13 +189,13 @@
             100% { transform: scale(1.35); opacity: 0; border-color: #ec4899; }
         }
 
-        /* Dynamic Floating Combat Text (+1 Aura!) */
+        /* Dynamic Floating Combat Text */
         .floating-aura-text {
             position: fixed;
             pointer-events: none;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: #fbbf24;
             text-shadow: 0 0 12px #f59e0b, 0 0 25px #8b5cf6, 0 0 35px #ec4899;
             z-index: 1000;
@@ -195,27 +203,15 @@
         }
 
         @keyframes floatUpAndBurst {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, 0) scale(0.5) rotate(-5deg);
-            }
-            20% {
-                opacity: 1;
-                transform: translate(-50%, -25px) scale(1.4) rotate(3deg);
-            }
-            70% {
-                opacity: 1;
-                transform: translate(-50%, -65px) scale(1.1) rotate(-2deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -105px) scale(0.8) rotate(5deg);
-            }
+            0% { opacity: 0; transform: translate(-50%, 0) scale(0.5) rotate(-5deg); }
+            20% { opacity: 1; transform: translate(-50%, -25px) scale(1.35) rotate(3deg); }
+            70% { opacity: 1; transform: translate(-50%, -65px) scale(1.05) rotate(-2deg); }
+            100% { opacity: 0; transform: translate(-50%, -105px) scale(0.8) rotate(5deg); }
         }
 
-        /* Counter Widget Styling */
+        /* Aura Counter Box */
         .aura-counter-box {
-            background: linear-gradient(135deg, rgba(30, 27, 75, 0.85), rgba(15, 23, 42, 0.95));
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.9), rgba(15, 23, 42, 0.95));
             border: 1px solid rgba(6, 182, 212, 0.5);
             box-shadow: 0 0 25px rgba(6, 182, 212, 0.25);
         }
@@ -226,12 +222,26 @@
 
         @keyframes counterBump {
             0% { transform: scale(1); }
-            50% { transform: scale(1.25); color: #f59e0b; }
+            50% { transform: scale(1.2); color: #f59e0b; }
             100% { transform: scale(1); }
         }
+
+        /* Cooldown Button Disabled Styling */
+        .btn-cooldown {
+            pointer-events: none !important;
+            opacity: 0.55 !important;
+            filter: grayscale(40%) !important;
+            cursor: not-allowed !important;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
     </style>
 </head>
-<body class="min-h-screen relative flex flex-col items-center justify-between p-4 sm:p-6 md:p-10">
+<body class="min-h-screen relative flex flex-col items-center justify-between p-3 sm:p-6 md:p-8">
 
     <!-- Interactive Canvas Particle Background -->
     <canvas id="aura-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
@@ -241,8 +251,22 @@
     <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/25 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/20 rounded-full blur-[120px] pointer-events-none"></div>
 
+    <!-- LEVEL UP TOAST BANNER MODAL -->
+    <div id="level-up-toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden transition-all duration-500 pointer-events-none w-11/12 max-w-md">
+        <div class="bg-gradient-to-r from-amber-500 via-purple-600 to-pink-500 p-1 rounded-2xl shadow-2xl shadow-amber-500/50 animate-level-bounce">
+            <div class="bg-slate-950 px-6 py-4 rounded-[0.9rem] flex items-center justify-between gap-4 text-center">
+                <div class="text-3xl animate-bounce">👑</div>
+                <div>
+                    <div class="text-xs font-black uppercase text-amber-400 tracking-widest">THẦN THÁI MỚI MỞ KHÓA!</div>
+                    <div id="level-up-rank-name" class="text-base sm:text-lg font-black text-white aura-text-gradient">Rank Up!</div>
+                </div>
+                <div class="text-3xl animate-bounce">⚡</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Glass Showcase Card Container -->
-    <main id="main-card" class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-6 sm:p-10 md:p-12 my-auto transition-all duration-300">
+    <main id="main-card" class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-5 sm:p-8 md:p-10 my-auto transition-all duration-300">
         
         <!-- Header Crown Badge -->
         <div class="flex justify-center mb-6">
@@ -254,29 +278,32 @@
         </div>
 
         <!-- Grid: Left Image & Right Details -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center">
             
             <!-- Photo Column -->
             <div class="md:col-span-5 flex flex-col items-center">
                 <div id="photo-container" class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group cursor-pointer transition-transform duration-300 active:scale-95" onclick="triggerAuraBurst(event, 1)">
                     <div class="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-950 relative flex items-center justify-center">
                         
-                        <!-- Primary User Photo (1000154590_3.jpg with fallback chain) -->
+                        <!-- User Image (1000154590_3.jpg with SVG fallback) -->
                         <img 
                             id="duong-photo"
                             src="1000154590_3.jpg" 
-                            alt="Dương - Aura Bá Khí" 
+                            alt="Dương Aura Bá Khí" 
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                             onerror="handlePhotoError(this)"
                         >
 
-                        <!-- Fallback Vector Artwork (Shows automatically if image file path isn't local) -->
+                        <!-- Fallback Vector Artwork SVG -->
                         <div id="photo-fallback" class="hidden absolute inset-0 bg-gradient-to-br from-purple-950 via-slate-900 to-cyan-950 flex flex-col items-center justify-center p-6 text-center">
-                            <div class="w-20 h-20 rounded-full bg-purple-500/20 border-2 border-purple-400/50 flex items-center justify-center text-amber-400 text-4xl mb-3 animate-pulse">
-                                <i class="fa-solid fa-whiskey-glass"></i>
+                            <div class="w-24 h-24 rounded-full bg-purple-500/20 border-2 border-purple-400/50 flex items-center justify-center text-amber-400 mb-3 animate-pulse">
+                                <!-- Custom SVG Avatar of Person drinking from paper cup -->
+                                <svg class="w-16 h-16 text-cyan-300 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 2a5 5 0 0 0-5 5v1a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5zm-1 11a7 7 0 0 0-7 7 1 1 0 0 0 1 1h12a1 1 0 0 0 1-1 7 7 0 0 0-7-7zm7.5-3.5l1.5.5a1 1 0 0 1 .5 1.3l-2 4a1 1 0 0 1-1.3.5l-1.5-.5a1 1 0 0 1-.5-1.3l2-4a1 1 0 0 1 1.3-.5z"/>
+                                </svg>
                             </div>
                             <h3 class="font-display font-black text-xl text-purple-200 tracking-wider">DƯƠNG AURA</h3>
-                            <p class="text-xs text-cyan-400 font-semibold mt-1">Chill & Bá Khí</p>
+                            <p class="text-xs text-cyan-400 font-semibold mt-1">Thần Thái Ngụm Nước Bá Khí</p>
                         </div>
                         
                         <!-- Dark Vignette Overlay -->
@@ -296,75 +323,105 @@
             </div>
 
             <!-- Details Column -->
-            <div class="md:col-span-7 space-y-5 text-center md:text-left">
+            <div class="md:col-span-7 space-y-4 text-center md:text-left">
                 
                 <!-- Main Title & Badge -->
                 <div>
-                    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-3">
+                    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-2">
                         <span class="aura-text-gradient">DƯƠNG</span>
                     </h1>
-                    <div class="inline-block px-3.5 py-1 rounded-lg bg-purple-500/15 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-bold tracking-wider uppercase shadow-inner">
+                    <div class="inline-block px-3.5 py-1 rounded-lg bg-purple-500/20 border border-purple-500/50 text-purple-300 text-xs sm:text-sm font-bold tracking-wider uppercase shadow-inner">
                         ⚡ Aura Bá Khí
                     </div>
                 </div>
 
-                <!-- Epic Tagline -->
+                <!-- Tagline -->
                 <p class="text-xs sm:text-sm font-extrabold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
                     <i class="fa-solid fa-bolt-lightning text-amber-400 text-sm animate-bounce"></i>
                     <span>PHONG THÁI ĐỈNH CÁO – AURA ÁP ĐẢO – THẦN THÁI NGÚT NGÀN</span>
                 </p>
 
                 <!-- Persona Quote / Description -->
-                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium bg-slate-950/60 p-4 rounded-2xl border border-purple-500/20 backdrop-blur-sm shadow-inner">
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium bg-slate-950/60 p-3.5 rounded-2xl border border-purple-500/20 backdrop-blur-sm shadow-inner">
                     "Dương - người sở hữu <span class="text-purple-300 font-bold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình, khí chất lãnh đạo và sự tự tin không thể nhầm lẫn."
                 </p>
 
-                <!-- Stats Grid -->
-                <div class="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1">
-                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-purple-500/80 hover:bg-slate-900">
-                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Aura Bá Khí</div>
+                <!-- Stats Grid with DYNAMIC RANK SYSTEM -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                    
+                    <!-- Stat 1: Aura Bá Khí % -->
+                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 text-center transition hover:border-purple-500/80 hover:bg-slate-900">
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Aura Bá Khí</div>
                         <div class="text-sm sm:text-base font-black text-purple-400 flex items-center justify-center gap-1">
                             <span>100%</span>
                             <span class="text-[9px] bg-purple-500/30 text-purple-300 px-1 py-0.5 rounded font-bold">MAX</span>
                         </div>
                     </div>
 
-                    <div class="bg-slate-900/80 border border-cyan-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-cyan-500/80 hover:bg-slate-900">
-                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Thần Thái</div>
-                        <div class="text-sm sm:text-base font-black text-cyan-300 mt-1">Đỉnh Cao</div>
+                    <!-- Stat 2: Dynamic Aura Rank -->
+                    <div id="rank-card" class="bg-slate-900/90 border border-slate-600/50 rounded-xl p-2.5 text-center transition-all duration-300">
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Thần Thái Rank</div>
+                        <div id="aura-rank-title" class="text-xs sm:text-sm font-black text-slate-400 transition-all duration-300">
+                            Thằng Nghèo 💸
+                        </div>
                     </div>
 
-                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-xl p-2.5 sm:p-3 text-center transition hover:border-amber-500/80 hover:bg-slate-900">
-                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Phong Thái</div>
-                        <div class="text-[11px] sm:text-xs font-black text-amber-300 mt-1">Điềm Tĩnh</div>
+                    <!-- Stat 3: Phong Thái -->
+                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-xl p-2.5 text-center transition hover:border-amber-500/80 hover:bg-slate-900">
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Phong Thái</div>
+                        <div class="text-[11px] sm:text-xs font-black text-amber-300 mt-0.5">Điềm Tĩnh & Cuốn Hút</div>
                     </div>
                 </div>
 
-                <!-- Interactive Action & Counter Bar -->
-                <div class="pt-3 flex flex-wrap items-center justify-center md:justify-start gap-4">
+                <!-- Rank Progress Bar -->
+                <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                    <div class="flex justify-between text-[11px] font-bold mb-1">
+                        <span class="text-slate-400">Tiến Trình Thần Thái:</span>
+                        <span id="rank-progress-text" class="text-cyan-400">1 / 36.000 AP</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800">
+                        <div id="rank-progress-bar" class="h-full bg-gradient-to-r from-purple-500 via-cyan-400 to-amber-400 rounded-full transition-all duration-300" style="width: 0.1%;"></div>
+                    </div>
+                </div>
+
+                <!-- Instant Action & Counter Bar (No Cooldown for these) -->
+                <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3">
                     
-                    <!-- Bộc Phá Aura Button -->
+                    <!-- Bộc Phá Aura Main Button (+1 AP - NO COOLDOWN) -->
                     <button 
                         id="burst-btn" 
                         onclick="triggerAuraBurst(event, 1)" 
-                        class="relative group overflow-hidden px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-black text-xs sm:text-sm tracking-widest uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-500/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
+                        class="relative group overflow-hidden px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-black text-xs sm:text-sm tracking-widest uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-500/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 cursor-pointer border border-purple-400/40"
                     >
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-base group-hover:rotate-45 transition-transform duration-300"></i>
-                        <span>Bộc Phát Aura</span>
-                        
-                        <!-- Shimmer animation overlay -->
+                        <span>💥 BỘC PHÁ AURA (+1)</span>
                         <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shimmer"></div>
                     </button>
 
+                    <!-- Quick Boost Buttons (+100 & +500 - NO COOLDOWN) -->
+                    <button 
+                        onclick="triggerAuraBurst(event, 100)" 
+                        class="px-3.5 py-3 rounded-xl bg-purple-950/80 border border-purple-500/50 hover:border-purple-400 text-purple-300 font-extrabold text-xs shadow-lg hover:bg-purple-900/80 hover:scale-105 active:scale-95 transition cursor-pointer"
+                    >
+                        ⚡ +100
+                    </button>
+
+                    <button 
+                        onclick="triggerAuraBurst(event, 500)" 
+                        class="px-3.5 py-3 rounded-xl bg-amber-950/80 border border-amber-500/50 hover:border-amber-400 text-amber-300 font-extrabold text-xs shadow-lg hover:bg-amber-900/80 hover:scale-105 active:scale-95 transition cursor-pointer"
+                    >
+                        🔥 +500
+                    </button>
+
                     <!-- Aura Counter Widget -->
-                    <div class="aura-counter-box px-5 py-2.5 rounded-2xl flex items-center gap-3 transition-all duration-300">
-                        <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-amber-400 text-base animate-pulse">
+                    <div class="aura-counter-box px-4 py-2 rounded-2xl flex items-center gap-3 transition-all duration-300">
+                        <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-amber-400 text-sm animate-pulse">
                             <i class="fa-solid fa-fire-flame-curved"></i>
                         </div>
                         <div class="text-left">
-                            <div class="text-[10px] text-cyan-300 font-extrabold tracking-wider uppercase">Điểm Aura Bá Khí</div>
-                            <div class="text-lg font-black text-white flex items-center gap-1.5">
-                                <span id="aura-count" class="aura-text-gradient text-xl font-black">9,000</span>
+                            <div class="text-[9px] text-cyan-300 font-extrabold tracking-wider uppercase">Điểm Aura Bá Khí</div>
+                            <div class="text-sm sm:text-base font-black text-white flex items-center gap-1">
+                                <span id="aura-count" class="aura-text-gradient text-lg sm:text-xl font-black">1</span>
                                 <span class="text-[10px] font-bold text-slate-400 uppercase">AP</span>
                             </div>
                         </div>
@@ -376,60 +433,128 @@
 
         </div>
 
-        <!-- Interactive Legendary Story Section: Sử Thi Ngụm Nước Vũ Trụ -->
-        <section class="mt-10 pt-8 border-t border-purple-500/30">
-            <div class="story-codex-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+        <!-- Interactive Quiz Section: "Dương có bá khí không?" (WITH 3S COOLDOWN) -->
+        <section class="mt-8 pt-6 border-t border-purple-500/30">
+            <div class="quiz-card rounded-2xl p-5 sm:p-7 relative overflow-hidden">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 text-lg shadow-lg">
+                        <i class="fa-solid fa-circle-question animate-bounce"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-black text-base sm:text-lg text-cyan-300 uppercase tracking-wider">
+                            TRẮC NGHIỆM BÁ KHÍ
+                        </h2>
+                        <p class="text-xs text-slate-400">Thử thách đánh giá thần thái của Dương để gia tăng Aura! (Hồi chiêu 3s)</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 rounded-xl border border-cyan-500/30 mb-4">
+                    <p class="text-sm sm:text-base font-extrabold text-white text-center sm:text-left">
+                        ❓ Câu hỏi: <span class="text-amber-300 font-black">Dương có bá khí không?</span>
+                    </p>
+                </div>
+
+                <!-- Quiz Options (3 Seconds Cooldown) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Option A: +3,600 AP (3s Cooldown) -->
+                    <button 
+                        id="quiz-btn-a"
+                        onclick="handleCooldownAction(this, 3, (e) => answerQuiz(e, 3600, 'A'))" 
+                        class="group relative overflow-hidden p-4 rounded-xl bg-gradient-to-r from-slate-900 to-indigo-950 border border-indigo-500/40 hover:border-cyan-400 text-left transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-lg"
+                    >
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-black text-cyan-300 text-sm btn-label">Lựa Chọn A</span>
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">+3.600 Aura</span>
+                        </div>
+                        <p class="text-xs text-slate-200 font-bold btn-sub">A. Có ✨</p>
+                    </button>
+
+                    <!-- Option B: +10,000 AP (3s Cooldown) -->
+                    <button 
+                        id="quiz-btn-b"
+                        onclick="handleCooldownAction(this, 3, (e) => answerQuiz(e, 10000, 'B'))" 
+                        class="group relative overflow-hidden p-4 rounded-xl bg-gradient-to-r from-purple-950 via-slate-900 to-amber-950 border border-amber-500/50 hover:border-amber-400 text-left transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-xl shadow-amber-950/40"
+                    >
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-black text-amber-300 text-sm btn-label">Lựa Chọn B (Bá Khí)</span>
+                            <span class="text-xs font-black px-2 py-0.5 rounded bg-amber-500/30 text-amber-200 border border-amber-400/50 animate-pulse">+10.000 Aura</span>
+                        </div>
+                        <p class="text-xs text-amber-200 font-extrabold btn-sub">B. Quả là người được chọn 💀</p>
+                    </button>
+                </div>
+
+                <!-- Quiz Response Display -->
+                <div id="quiz-feedback" class="hidden mt-3 p-3 rounded-xl bg-slate-900/90 border border-purple-500/40 text-center text-xs font-bold text-purple-300"></div>
+            </div>
+        </section>
+
+        <!-- Interactive Story Section: Sử Thi Ngụm Nước Vũ Trụ (WITH 3S COOLDOWN) -->
+        <section class="mt-6 pt-2">
+            <div class="story-codex-card rounded-2xl p-5 sm:p-7 relative overflow-hidden">
                 <!-- Background Glowing Emblem -->
                 <div class="absolute -right-8 -bottom-8 opacity-10 text-amber-400 text-9xl pointer-events-none">
                     <i class="fa-solid fa-scroll"></i>
                 </div>
 
                 <!-- Story Header -->
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 text-lg shadow-lg">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 text-base shadow-lg">
                         <i class="fa-solid fa-book-journal-whills"></i>
                     </div>
                     <div>
-                        <h2 class="font-display font-black text-lg sm:text-xl text-amber-300 uppercase tracking-wider flex items-center gap-2">
-                            <span>SỬ THI BÁ KHÍ: NGỤM NƯỚC VŨ TRỤ</span>
-                            <i class="fa-solid fa-sparkles text-amber-400 text-sm animate-pulse"></i>
+                        <h2 class="font-display font-black text-base sm:text-lg text-amber-300 uppercase tracking-wider flex items-center gap-2">
+                            <span>SỬ THI NGỤM NƯỚC VŨ TRỤ CỦA DƯƠNG BÁ KHÍ</span>
+                            <i class="fa-solid fa-sparkles text-amber-400 text-xs animate-pulse"></i>
                         </h2>
-                        <p class="text-xs text-purple-300 font-medium">Truyền thuyết về khoảnh khắc Dương thức tỉnh aura chấn động tam giới</p>
+                        <p class="text-[11px] text-purple-300 font-medium">Truyền thuyết về khoảnh khắc Dương thức tỉnh aura chấn động thiên hà</p>
                     </div>
                 </div>
 
                 <!-- Narrative Text -->
-                <div class="space-y-3 text-slate-300 text-xs sm:text-sm leading-relaxed font-normal bg-slate-950/70 p-4 sm:p-5 rounded-xl border border-amber-500/20 backdrop-blur-md">
+                <div class="space-y-2.5 text-slate-300 text-xs sm:text-sm leading-relaxed font-normal bg-slate-950/70 p-4 rounded-xl border border-amber-500/20 backdrop-blur-md mb-4">
                     <p class="first-letter:text-3xl first-letter:font-black first-letter:text-amber-400 first-letter:float-left first-letter:mr-2">
-                        Tương truyền vào một chiều bình dị, khi vạn vật đang chìm vào tĩnh lặng, <strong class="text-cyan-300 font-extrabold">Dương</strong> từ từ nâng chiếc cốc giấy lên. Không cần dùng đến binh khí hay thần chú, chỉ bằng một ngụm nước nhẹ nhàng, luồng <strong class="text-purple-300 font-extrabold">Aura Bá Khí</strong> bùng nổ vượt ngưỡng 9000 AP!
+                        Tương truyền vào một chiều bình dị, khi vạn vật đang chìm vào tĩnh lặng, <strong class="text-cyan-300 font-extrabold">Dương</strong> từ từ nâng chiếc cốc giấy lên. Không cần dùng đến binh khí hay thần chú, chỉ bằng một ngụm nước nhẹ nhàng, luồng <strong class="text-purple-300 font-extrabold">Aura Bá Khí</strong> bùng nổ vọt lên không trung!
                     </p>
                     <p>
                         Không khí xung quanh lập tức biến đổi: thời gian như dừng lại, các nguyên tố hội tụ, thần thái điềm tĩnh đến mức làm tan biến mọi thị phi. Đó không chỉ là uống nước – đó là khoảnh khắc <span class="text-amber-300 font-bold">Dương nạp năng lượng thống trị vũ trụ!</span>
                     </p>
                 </div>
 
-                <!-- Story Action Boost Buttons -->
-                <div class="mt-5 flex flex-wrap items-center justify-between gap-3 bg-slate-900/80 p-3.5 rounded-xl border border-purple-500/30">
-                    <div class="text-xs font-bold text-slate-300 flex items-center gap-2">
-                        <i class="fa-solid fa-bolt text-amber-400"></i>
-                        <span>Tiếp sức Bá Khí cho Dương:</span>
+                <!-- Story Interaction Choices (3 Seconds Cooldown) -->
+                <div class="space-y-2.5">
+                    <div class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-hand-holding-hand text-cyan-400"></i> Hỗ Trợ Dương Bá Khí (Hồi chiêu 3s):
                     </div>
-                    <div class="flex flex-wrap items-center gap-2.5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Story Choice 1: +5,000 Aura (3s Cooldown) -->
                         <button 
-                            onclick="triggerStoryBoost(event, 100)" 
-                            class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-700 to-cyan-600 text-white font-extrabold text-xs tracking-wider uppercase shadow-md hover:scale-105 active:scale-95 transition cursor-pointer flex items-center gap-1.5 border border-purple-400/40"
+                            id="story-btn-1"
+                            onclick="handleCooldownAction(this, 3, (e) => selectStoryChoice(e, 5000, 1))" 
+                            class="group relative overflow-hidden p-3.5 rounded-xl bg-gradient-to-r from-indigo-950 to-purple-950 border border-indigo-500/50 hover:border-cyan-400 text-left transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-lg"
                         >
-                            <i class="fa-solid fa-atom text-cyan-300 animate-spin"></i>
-                            <span>Truyền Năng Lượng (+100 AP)</span>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="font-extrabold text-cyan-300 text-xs btn-label">Lựa Chọn 1</span>
+                                <span class="text-[10px] font-black px-2 py-0.5 rounded bg-indigo-500/30 text-cyan-300 border border-indigo-400/40">+5.000 Aura</span>
+                            </div>
+                            <p class="text-xs text-slate-100 font-bold btn-sub">⚡ Tiếp thêm sức mạnh cho Dương</p>
                         </button>
+
+                        <!-- Story Choice 2: +12,300 Aura (3s Cooldown) -->
                         <button 
-                            onclick="triggerStoryBoost(event, 500)" 
-                            class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-pink-600 to-purple-600 text-white font-black text-xs tracking-wider uppercase shadow-lg shadow-amber-950/50 hover:scale-105 active:scale-95 transition cursor-pointer flex items-center gap-1.5 border border-amber-400/50"
+                            id="story-btn-2"
+                            onclick="handleCooldownAction(this, 3, (e) => selectStoryChoice(e, 12300, 2))" 
+                            class="group relative overflow-hidden p-3.5 rounded-xl bg-gradient-to-r from-amber-950 via-purple-950 to-slate-900 border border-amber-500/60 hover:border-amber-400 text-left transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-xl shadow-amber-950/40"
                         >
-                            <i class="fa-solid fa-fire text-amber-200 animate-bounce"></i>
-                            <span>Tôn Vinh Bá Khí (+500 AP)</span>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="font-extrabold text-amber-300 text-xs btn-label">Lựa Chọn 2 (Cống Hiến)</span>
+                                <span class="text-[10px] font-black px-2 py-0.5 rounded bg-amber-500/30 text-amber-200 border border-amber-400/50 animate-pulse">+12.300 Aura</span>
+                            </div>
+                            <p class="text-xs text-amber-200 font-black btn-sub">👑 Tôn thờ nguyện cống hiến cho Vua Dương Bá Khí</p>
                         </button>
                     </div>
+                    
+                    <!-- Story Feedback Display -->
+                    <div id="story-feedback" class="hidden mt-3 p-3 rounded-xl bg-slate-900/90 border border-amber-500/40 text-center text-xs font-bold text-amber-300"></div>
                 </div>
 
             </div>
@@ -438,16 +563,16 @@
     </main>
 
     <!-- Footer Section with "Web By Meoww" Badge -->
-    <footer class="relative z-10 w-full max-w-4xl mt-8 pt-4 pb-2 border-t border-slate-800/80 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+    <footer class="relative z-10 w-full max-w-4xl mt-6 pt-4 pb-2 border-t border-slate-800/80 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-2 text-slate-400 font-medium">
             <span>© 2026 DƯƠNG • Supreme Vibe & Aura</span>
         </div>
         
         <!-- Web By Meoww Signature Banner -->
-        <div class="flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-pink-500/50 shadow-lg shadow-pink-950/50 hover:border-pink-400 transition-all duration-300">
-            <i class="fa-solid fa-cat text-pink-400 text-base animate-bounce"></i>
-            <span class="meoww-text-gradient font-black tracking-widest text-sm uppercase">Web By Meoww</span>
-            <i class="fa-solid fa-sparkles text-amber-400 text-xs"></i>
+        <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-pink-500/60 shadow-xl shadow-pink-950/60 hover:border-pink-400 transition-all duration-300 hover:scale-105 cursor-pointer">
+            <i class="fa-solid fa-cat text-pink-400 text-lg animate-bounce"></i>
+            <span class="meoww-text-gradient font-black tracking-widest text-sm sm:text-base uppercase">Web By Meoww</span>
+            <i class="fa-solid fa-sparkles text-amber-400 text-xs animate-spin"></i>
         </div>
 
         <div class="text-purple-400 font-bold flex items-center gap-1.5">
@@ -456,17 +581,23 @@
     </footer>
 
     <script>
+        // Photo Fallback Error Handler
         function handlePhotoError(imgElement) {
-            imgElement.style.display = 'none';
-            const fallbackEl = document.getElementById('photo-fallback');
-            if (fallbackEl) {
-                fallbackEl.classList.remove('hidden');
+            if (imgElement.src.includes('1000154590_3.jpg')) {
+                imgElement.src = '1000154590.jpg';
+            } else {
+                imgElement.style.display = 'none';
+                const fallbackEl = document.getElementById('photo-fallback');
+                if (fallbackEl) {
+                    fallbackEl.classList.remove('hidden');
+                }
             }
         }
 
+        // Web Audio API Synthesizer with Level-Up Fanfare
         let audioCtx = null;
 
-        function playAuraBurstSound(multiplier = 1) {
+        function playAuraSound(type = 'burst') {
             try {
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -476,47 +607,77 @@
                 }
 
                 const now = audioCtx.currentTime;
-                const duration = multiplier > 1 ? 0.6 : 0.35;
 
-                // 1. Sub Bass Boom Oscillator
-                const subOsc = audioCtx.createOscillator();
-                const subGain = audioCtx.createGain();
-                subOsc.type = 'sine';
-                subOsc.frequency.setValueAtTime(multiplier > 1 ? 240 : 160, now);
-                subOsc.frequency.exponentialRampToValueAtTime(30, now + duration);
-                subGain.gain.setValueAtTime(multiplier > 1 ? 0.7 : 0.45, now);
-                subGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-                subOsc.connect(subGain);
-                subGain.connect(audioCtx.destination);
-                subOsc.start(now);
-                subOsc.stop(now + duration);
+                if (type === 'burst') {
+                    // Quick Punchy Sub Bass + Sine Ping
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(240, now);
+                    osc.frequency.exponentialRampToValueAtTime(45, now + 0.25);
+                    gain.gain.setValueAtTime(0.4, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'quizA' || type === 'choice1') {
+                    // Option A Chime / Choice 1
+                    [440, 554.37, 659.25].forEach((freq, index) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + index * 0.08);
+                        gain.gain.setValueAtTime(0.3, now + index * 0.08);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.08 + 0.4);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + index * 0.08);
+                        osc.stop(now + index * 0.08 + 0.4);
+                    });
+                } else if (type === 'quizB' || type === 'choice2') {
+                    // Ultimate Thunder Sweep
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(130, now);
+                    osc.frequency.exponentialRampToValueAtTime(1500, now + 0.7);
+                    
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(300, now);
+                    filter.frequency.exponentialRampToValueAtTime(6000, now + 0.7);
 
-                // 2. Power Sweep Synth
-                const sweepOsc = audioCtx.createOscillator();
-                const sweepGain = audioCtx.createGain();
-                sweepOsc.type = multiplier > 100 ? 'sawtooth' : 'triangle';
-                sweepOsc.frequency.setValueAtTime(200, now);
-                sweepOsc.frequency.exponentialRampToValueAtTime(multiplier > 100 ? 1400 : 880, now + (duration * 0.8));
-                
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(400, now);
-                filter.frequency.exponentialRampToValueAtTime(4000, now + (duration * 0.8));
+                    gain.gain.setValueAtTime(0.5, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
 
-                sweepGain.gain.setValueAtTime(0.3, now);
-                sweepGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-                sweepOsc.connect(filter);
-                filter.connect(sweepGain);
-                sweepGain.connect(audioCtx.destination);
-                sweepOsc.start(now);
-                sweepOsc.stop(now + duration);
-
+                    osc.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.7);
+                } else if (type === 'levelup') {
+                    // Triumphant Level Up Fanfare Arpeggio Chord Sequence
+                    const fanfareNotes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98]; // C5, E5, G5, C6, E6, G6
+                    fanfareNotes.forEach((freq, index) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + index * 0.09);
+                        gain.gain.setValueAtTime(0.4, now + index * 0.09);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.09 + 0.6);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + index * 0.09);
+                        osc.stop(now + index * 0.09 + 0.6);
+                    });
+                }
             } catch (e) {
-                // Silent fallback if audio context restricted by browser
+                // Silent fallback
             }
         }
 
+        // Particle Canvas Logic
         const canvas = document.getElementById('aura-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -528,7 +689,7 @@
         window.addEventListener('resize', resizeCanvas);
 
         const particles = [];
-        const particleColors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#38bdf8', '#fbbf24'];
+        const particleColors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#38bdf8', '#fbbf24', '#f43f5e'];
 
         class Particle {
             constructor(x, y, isBurst = false, intensity = 1) {
@@ -545,7 +706,7 @@
                 
                 if (this.isBurst) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = (Math.random() * 8 + 3) * Math.min(this.intensity, 2);
+                    const speed = (Math.random() * 8 + 3) * Math.min(this.intensity, 2.5);
                     this.vx = Math.cos(angle) * speed;
                     this.vy = Math.sin(angle) * speed;
                     this.alpha = 1;
@@ -586,7 +747,6 @@
             }
         }
 
-        // Initialize ambient drifting background particles
         for (let i = 0; i < 75; i++) {
             particles.push(new Particle());
         }
@@ -605,46 +765,161 @@
         }
         animateCanvas();
 
-        let currentAuraPoints = 9000;
+        // EXACT RANK TIERS SYSTEM
+        const RANK_TIERS = [
+            { id: 0, min: 1, max: 36000, name: "Thằng Nghèo 💸", color: "text-slate-400", border: "border-slate-600/50" },
+            { id: 1, min: 36000, max: 70000, name: "Thần thái rau má 🌿", color: "text-emerald-400", border: "border-emerald-500/50" },
+            { id: 2, min: 70000, max: 100000, name: "Sắp ngầu rồi 😎", color: "text-amber-400", border: "border-amber-500/50" },
+            { id: 3, min: 100000, max: 160000, name: "Bá khí 🔥", color: "text-orange-400", border: "border-orange-500/50" },
+            { id: 4, min: 160000, max: 250000, name: "Hoàng tử Bá khí 👑", color: "text-yellow-300", border: "border-yellow-400/60" },
+            { id: 5, min: 250000, max: 300000, name: "Vua Bá khí ⚔️", color: "text-red-400", border: "border-red-500/60" },
+            { id: 6, min: 300000, max: 400000, name: "Aura++💀", color: "text-purple-400", border: "border-purple-500/60" },
+            { id: 7, min: 400000, max: 500000, name: "Aura Prime ✨", color: "text-cyan-300", border: "border-cyan-400/60" },
+            { id: 8, min: 500000, max: 700000, name: "Yara yara Aura Prime 🌌", color: "text-fuchsia-400", border: "border-fuchsia-500/60" },
+            { id: 9, min: 700000, max: Infinity, name: "Trần Bình Prime 2019💀", color: "text-rose-500 font-black animate-pulse", border: "border-rose-500/80" }
+        ];
+
+        let currentAuraPoints = 1; // Starts at 1 ("Thằng Nghèo 💸")
+        let activeRankIndex = 0;
+        
         const counterElement = document.getElementById('aura-count');
+        const rankTitleElement = document.getElementById('aura-rank-title');
+        const rankProgressBar = document.getElementById('rank-progress-bar');
+        const rankProgressText = document.getElementById('rank-progress-text');
         const mainCard = document.getElementById('main-card');
         const photoContainer = document.getElementById('photo-container');
 
+        function updateRankSystem() {
+            let currentRank = RANK_TIERS[0];
+            let nextRank = RANK_TIERS[1];
+            let newRankIndex = 0;
+
+            for (let i = 0; i < RANK_TIERS.length; i++) {
+                if (currentAuraPoints >= RANK_TIERS[i].min) {
+                    currentRank = RANK_TIERS[i];
+                    nextRank = RANK_TIERS[i + 1] || null;
+                    newRankIndex = i;
+                }
+            }
+
+            // Check if level-up rank transition happened
+            if (newRankIndex > activeRankIndex) {
+                triggerRankLevelUpCelebration(currentRank);
+            }
+            activeRankIndex = newRankIndex;
+
+            // Update Rank Title & Style
+            rankTitleElement.textContent = currentRank.name;
+            rankTitleElement.className = `text-xs sm:text-sm font-black transition-all duration-300 ${currentRank.color}`;
+            
+            // Update Progress Bar
+            if (nextRank && nextRank.max !== Infinity) {
+                const range = currentRank.max - currentRank.min;
+                const currentProgress = currentAuraPoints - currentRank.min;
+                const percentage = Math.min(100, Math.max(0.1, (currentProgress / range) * 100));
+                
+                rankProgressBar.style.width = `${percentage}%`;
+                rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} / ${currentRank.max.toLocaleString()} AP`;
+            } else {
+                rankProgressBar.style.width = `100%`;
+                rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} AP (MAX RANK)`;
+            }
+        }
+
+        // LEVEL UP CELEBRATION
+        function triggerRankLevelUpCelebration(rankObj) {
+            playAuraSound('levelup');
+
+            const toast = document.getElementById('level-up-toast');
+            const rankNameEl = document.getElementById('level-up-rank-name');
+            rankNameEl.textContent = rankObj.name;
+
+            toast.classList.remove('hidden');
+
+            // Explosive Firework Particles
+            for (let i = 0; i < 120; i++) {
+                particles.push(new Particle(window.innerWidth / 2, window.innerHeight / 2, true, 3));
+            }
+
+            // Screen Shake
+            mainCard.classList.remove('shake-effect', 'mega-shake-effect');
+            void mainCard.offsetWidth;
+            mainCard.classList.add('mega-shake-effect');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        // Initialize display
+        updateRankSystem();
+
+        // Cooldown Manager (3 Seconds)
+        function handleCooldownAction(btnElement, seconds, actionCallback) {
+            if (btnElement.classList.contains('btn-cooldown')) return;
+
+            // Trigger the actual action
+            actionCallback(window.event);
+
+            // Add cooldown state
+            btnElement.classList.add('btn-cooldown');
+            
+            const subTextEl = btnElement.querySelector('.btn-sub') || btnElement;
+            const originalSubText = subTextEl.innerHTML;
+
+            let remaining = seconds;
+            subTextEl.innerHTML = `⏳ Hồi chiêu: ${remaining}s...`;
+
+            const timer = setInterval(() => {
+                remaining -= 1;
+                if (remaining > 0) {
+                    subTextEl.innerHTML = `⏳ Hồi chiêu: ${remaining}s...`;
+                } else {
+                    clearInterval(timer);
+                    btnElement.classList.remove('btn-cooldown');
+                    subTextEl.innerHTML = originalSubText;
+                }
+            }, 1000);
+        }
+
         const combatPhrases = [
             '+1 AURA! ⚡',
-            '⚡ BÁ KHÍ +1000!',
-            '🔥 OVERPOWERED!',
+            '⚡ BÁ KHÍ TĂNG!',
+            '🔥 THẦN THÁI BÙNG NỔ!',
             '✨ PHONG THÁI MAX!',
-            '💥 SUPREME VIBE!'
+            '💥 SUPREME AURA!'
         ];
 
         function triggerAuraBurst(event, amount = 1) {
-            playAuraBurstSound(amount > 1 ? 2 : 1);
+            playAuraSound('burst');
 
             // Update counter
             currentAuraPoints += amount;
             counterElement.textContent = currentAuraPoints.toLocaleString();
+
+            // Update dynamic rank
+            updateRankSystem();
 
             // Counter Bump Effect
             counterElement.classList.remove('counter-bump');
             void counterElement.offsetWidth;
             counterElement.classList.add('counter-bump');
 
-            // Locate click position
+            // Click Position
             const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
             const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
 
-            // Spawn floating combat text
-            createFloatingText(clientX, clientY, amount === 1 ? null : `+${amount} AURA! 🔥`);
+            // Combat Float Text
+            createFloatingText(clientX, clientY, amount === 1 ? null : `+${amount.toLocaleString()} AP! 🔥`);
 
-            // Spawn explosive particles
-            const particleCount = amount > 100 ? 70 : 35;
+            // Particle Explosion
+            const particleCount = amount >= 10000 ? 70 : 25;
             for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle(clientX, clientY, true, amount > 100 ? 1.5 : 1));
+                particles.push(new Particle(clientX, clientY, true, amount >= 10000 ? 2 : 1));
             }
 
-            // Screen Shake
-            const shakeClass = amount >= 500 ? 'mega-shake-effect' : 'shake-effect';
+            // Screen Shake Effect
+            const shakeClass = amount >= 10000 ? 'mega-shake-effect' : 'shake-effect';
             mainCard.classList.remove('shake-effect', 'mega-shake-effect');
             void mainCard.offsetWidth;
             mainCard.classList.add(shakeClass);
@@ -657,8 +932,68 @@
             }
         }
 
-        function triggerStoryBoost(event, boostAmount) {
-            triggerAuraBurst(event, boostAmount);
+        // Interactive Quiz Logic
+        function answerQuiz(event, auraBonus, choice) {
+            playAuraSound(choice === 'A' ? 'quizA' : 'quizB');
+
+            currentAuraPoints += auraBonus;
+            counterElement.textContent = currentAuraPoints.toLocaleString();
+            updateRankSystem();
+
+            const feedbackEl = document.getElementById('quiz-feedback');
+            feedbackEl.classList.remove('hidden');
+
+            if (choice === 'A') {
+                feedbackEl.innerHTML = `<span class="text-cyan-300">✨ Chuẩn luôn! Dương đã nhận ngay <strong class="text-amber-300">+3.600 Aura</strong> bá khí!</span>`;
+            } else {
+                feedbackEl.innerHTML = `<span class="text-amber-300">💀 CHÍNH XÁC! Dương là người được chọn! Thăng cấp siêu tốc <strong class="text-pink-400">+10.000 Aura</strong>! ⚡</span>`;
+            }
+
+            // Explosion effect
+            const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
+            const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
+
+            for (let i = 0; i < (choice === 'B' ? 80 : 40); i++) {
+                particles.push(new Particle(clientX, clientY, true, choice === 'B' ? 2.5 : 1.5));
+            }
+
+            mainCard.classList.remove('shake-effect', 'mega-shake-effect');
+            void mainCard.offsetWidth;
+            mainCard.classList.add(choice === 'B' ? 'mega-shake-effect' : 'shake-effect');
+
+            createFloatingText(clientX, clientY, `+${auraBonus.toLocaleString()} AP! ⚡`);
+        }
+
+        // Story Interaction Choices Logic
+        function selectStoryChoice(event, auraBonus, choiceNumber) {
+            playAuraSound(choiceNumber === 1 ? 'choice1' : 'choice2');
+
+            currentAuraPoints += auraBonus;
+            counterElement.textContent = currentAuraPoints.toLocaleString();
+            updateRankSystem();
+
+            const feedbackEl = document.getElementById('story-feedback');
+            feedbackEl.classList.remove('hidden');
+
+            if (choiceNumber === 1) {
+                feedbackEl.innerHTML = `<span class="text-cyan-300">⚡ Bạn đã tiếp thêm sức mạnh thần thánh cho Dương! Nhận ngay <strong class="text-amber-300">+5.000 Aura</strong>!</span>`;
+            } else {
+                feedbackEl.innerHTML = `<span class="text-amber-300">👑 TẤT CẢ BÁI PHỤC VUA DƯƠNG BÁ KHÍ! Nhận ngay siêu thưởng <strong class="text-pink-400">+12.300 Aura</strong>! ⚡</span>`;
+            }
+
+            // Explosion effect
+            const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
+            const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
+
+            for (let i = 0; i < (choiceNumber === 2 ? 80 : 40); i++) {
+                particles.push(new Particle(clientX, clientY, true, choiceNumber === 2 ? 2.5 : 1.5));
+            }
+
+            mainCard.classList.remove('shake-effect', 'mega-shake-effect');
+            void mainCard.offsetWidth;
+            mainCard.classList.add(choiceNumber === 2 ? 'mega-shake-effect' : 'shake-effect');
+
+            createFloatingText(clientX, clientY, `+${auraBonus.toLocaleString()} AP! 🔥`);
         }
 
         function createFloatingText(x, y, customText = null) {
