@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DƯƠNG | Aura Bá Khí</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        aura: {
+                            purple: '#8b5cf6',
+                            cyan: '#06b6d4',
+                            gold: '#f59e0b',
+                            dark: '#030712'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'aura-spin': 'auraRotate 8s linear infinite',
+                        'aura-pulse': 'auraPulse 3s ease-in-out infinite alternate',
+                        'float': 'float 4s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s infinite'
+                    },
+                    keyframes: {
+                        auraRotate: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        },
+                        auraPulse: {
+                            '0%': { boxShadow: '0 0 25px rgba(139, 92, 246, 0.5), 0 0 50px rgba(6, 182, 212, 0.3)' },
+                            '100%': { boxShadow: '0 0 60px rgba(139, 92, 246, 0.9), 0 0 100px rgba(245, 158, 11, 0.6)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' }
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+        }
+
+        /* Animated Aura Gradient Text */
+        .aura-text-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 50%, #fbbf24 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 4s linear infinite alternate;
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Glassmorphism Container */
+        .glass-aura-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Multilayer Glowing Aura Border for Image */
+        .aura-wrapper {
+            position: relative;
+            border-radius: 2rem;
+            padding: 5px;
+        }
+
+        .aura-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 2.2rem;
+            background: linear-gradient(45deg, #8b5cf6, #06b6d4, #f59e0b, #ec4899, #8b5cf6);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: auraGradient 6s ease infinite, auraGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes auraGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes auraGlow {
+            0% { filter: blur(12px) opacity(0.7); }
+            100% { filter: blur(25px) opacity(1); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b5cf6;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex items-center justify-center overflow-x-hidden p-4 sm:p-6 md:p-10">
+
+    <!-- Background Canvas Particles -->
+    <canvas id="aura-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Background Ambient Glow Orbs -->
+    <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
+    <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/20 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
+    <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- Main Card Container -->
+    <main class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-6 sm:p-10 md:p-12 my-auto transition-all duration-500 hover:border-purple-500/50">
+        
+        <!-- Top Crown Badge -->
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-bold tracking-widest uppercase shadow-lg shadow-purple-950/50 animate-float">
+                <i class="fa-solid fa-crown text-amber-400 text-base animate-bounce"></i>
+                <span class="aura-text-gradient font-extrabold">AURA OVER 9000</span>
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            </div>
+        </div>
+
+        <!-- Hero Grid: Photo & Intro Details -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+            
+            <!-- Image Column (Left) -->
+            <div class="md:col-span-5 flex flex-col items-center">
+                <div class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group">
+                    <div class="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-950 relative">
+                        <img 
+                            src="1000154590.jpg" 
+                            alt="Dương - Aura Bá Khí" 
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/8b5cf6?text=D%C6%B0%C6%A1ng+Aura';"
+                        >
+                        <!-- Dark Overlay Vignette -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60"></div>
+                        
+                        <!-- Floating Badge on Photo -->
+                        <div class="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 px-3.5 py-2 rounded-xl flex items-center justify-between text-xs">
+                            <span class="text-slate-300 font-medium flex items-center gap-1.5">
+                                <i class="fa-solid fa-whiskey-glass text-amber-400"></i> Chill & Power
+                            </span>
+                            <span class="text-cyan-400 font-bold tracking-wider">MAX POWER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Column (Right) -->
+            <div class="md:col-span-7 space-y-6 text-center md:text-left">
+                
+                <!-- Main Name & Aura Tag -->
+                <div>
+                    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-3">
+                        DƯƠNG
+                    </h1>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300 text-sm font-semibold tracking-wider">
+                        ⚡ Aura Bá Khí
+                    </div>
+                </div>
+
+                <!-- Epic Tagline -->
+                <p class="text-sm sm:text-base font-bold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-bolt text-amber-400"></i>
+                    <span>Phong Thái Đỉnh Cao - Aura Áp Đảo - Thần Thái Ngút Ngàn</span>
+                </p>
+
+                <!-- Detailed Description -->
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-800/80 backdrop-blur-sm">
+                    "Dương - người sở hữu <span class="text-purple-300 font-semibold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình, khí chất lãnh đạo và sự tự tin không thể nhầm lẫn."
+                </p>
+
+                <!-- Aura Stats Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    
+                    <!-- Stat Card 1 -->
+                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-2xl p-3.5 text-center transition hover:border-purple-500/80 hover:bg-slate-800/80">
+                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Aura Bá Khí</div>
+                        <div class="text-xl font-black text-purple-400 flex items-center justify-center gap-1">
+                            <span>100%</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-semibold">MAX</span>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card 2 -->
+                    <div class="bg-slate-900/80 border border-cyan-500/30 rounded-2xl p-3.5 text-center transition hover:border-cyan-500/80 hover:bg-slate-800/80">
+                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Thần Thái</div>
+                        <div class="text-lg font-black text-cyan-300">Đỉnh Cao</div>
+                    </div>
+
+                    <!-- Stat Card 3 -->
+                    <div class="bg-slate-900/80 border border-amber-500/30 rounded-2xl p-3.5 text-center transition hover:border-amber-500/80 hover:bg-slate-800/80">
+                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Phong Thái</div>
+                        <div class="text-xs sm:text-sm font-extrabold text-amber-300 mt-1">Điềm Tĩnh & Cuốn Hút</div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Action Button -->
+                <div class="pt-2 flex justify-center md:justify-start">
+                    <button id="burst-btn" onclick="triggerAuraBurst()" class="relative group overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-extrabold text-sm tracking-wider uppercase shadow-xl shadow-purple-950/80 hover:shadow-purple-600/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-3">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-lg group-hover:rotate-12 transition-transform"></i>
+                        <span>Bộc Phát Aura</span>
+                        
+                        <!-- Shimmer overlay effect -->
+                        <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shimmer"></div>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom Footer Credit -->
+        <footer class="mt-10 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>© 2026 DƯƠNG • Supreme Vibe & Aura</span>
+            <span class="text-purple-400 font-semibold flex items-center gap-1">
+                <i class="fa-solid fa-shield-halved text-cyan-400"></i> Absolute Presence
+            </span>
+        </footer>
+
+    </main>
+
+    <!-- Scripts for Particle Effects & Interaction -->
+    <script>
+        // Background Aura Particle System
+        const canvas = document.getElementById('aura-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        const colors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899'];
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 3 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.8) * 0.8; // Floating upwards
+                this.alpha = Math.random() * 0.6 + 0.2;
+                this.decay = Math.random() * 0.003 + 0.001;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+
+                if (this.alpha <= 0 || this.y < 0 || this.x < 0 || this.x > canvas.width) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Create particles
+        for (let i = 0; i < 60; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateAura() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateAura);
+        }
+
+        animateAura();
+
+        // Aura Burst Interaction
+        function triggerAuraBurst() {
+            // Burst extra particles
+            for (let i = 0; i < 40; i++) {
+                const p = new Particle();
+                p.x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
+                p.y = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
+                p.radius = Math.random() * 5 + 2;
+                p.alpha = 1;
+                p.vx = (Math.random() - 0.5) * 6;
+                p.vy = (Math.random() - 0.5) * 6;
+                particles.push(p);
+            }
+
+            // Visual feedback on card
+            const card = document.querySelector('main');
+            card.classList.add('scale-[1.02]');
+            card.style.boxShadow = '0 0 100px rgba(139, 92, 246, 0.9), 0 0 150px rgba(6, 182, 212, 0.6)';
+
+            setTimeout(() => {
+                card.classList.remove('scale-[1.02]');
+                card.style.boxShadow = '';
+            }, 600);
+        }
+    </script>
+</body>
+</html>
+```
