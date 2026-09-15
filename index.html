@@ -62,7 +62,6 @@
         }
     </script>
 
-    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -668,24 +667,25 @@
             getFirestore, doc, setDoc, collection, onSnapshot 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'duong-aura-bakhi-app';
-        let firebaseConfig = null;
-        try {
-            if (typeof __firebase_config !== 'undefined') {
-                firebaseConfig = JSON.parse(__firebase_config);
-            }
-        } catch(e) { console.warn('Firebase config parse error:', e); }
+        // EMBEDDED FIREBASE CONFIG CREDENTIALS
+        const embeddedFirebaseConfig = {
+            apiKey: "AIzaSyAJMqGogLpTxIzkVl4ueKHHoEPoQhtsMS4",
+            authDomain: "duong-603a4.firebaseapp.com",
+            projectId: "duong-603a4",
+            storageBucket: "duong-603a4.firebasestorage.app",
+            messagingSenderId: "966073698541",
+            appId: "1:966073698541:web:4290b11c483ee480d524e4",
+            measurementId: "G-443TCR23C6"
+        };
 
-        if (!firebaseConfig) {
-            firebaseConfig = {
-                apiKey: "AIzaSyDemoFallbackKeyForTestingOnly",
-                authDomain: "demo-app.firebaseapp.com",
-                projectId: "demo-app",
-                storageBucket: "demo-app.appspot.com",
-                messagingSenderId: "123456789",
-                appId: "1:123456789:web:abcdef123456"
-            };
-        }
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'duong-aura-bakhi-app';
+        let firebaseConfig = embeddedFirebaseConfig;
+        try {
+            if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                const parsed = JSON.parse(__firebase_config);
+                if (parsed && parsed.apiKey) firebaseConfig = parsed;
+            }
+        } catch(e) { console.warn('Firebase config override parse notice:', e); }
 
         let app, auth, db;
         try {
@@ -697,17 +697,15 @@
         }
 
         let currentUser = null;
-        let authTabMode = 'login'; // 'login' or 'register'
+        let authTabMode = 'login';
 
         async function initAuth() {
             if (!auth) return;
 
-            // Handle custom token if available
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
                 } else {
-                    // Fallback to anonymous auth if not signed in
                     if (!auth.currentUser) {
                         await signInAnonymously(auth);
                     }
@@ -727,7 +725,6 @@
                 }
             });
 
-            // Start listening to Leaderboard in Firestore
             setupLeaderboardListener();
         }
 
@@ -821,16 +818,14 @@
             // RULE 1 Strict Path: /artifacts/{appId}/public/data/{collectionName}
             const leaderboardCol = collection(db, 'artifacts', appId, 'public', 'data', 'leaderboard');
             
-            // RULE 2: No complex queries with orderBy/limit in Firestore. Simple collection fetch + sort in JS!
+            // RULE 2: No complex queries with orderBy/limit in Firestore. Fetch collection and sort in JS memory!
             leaderboardUnsubscribe = onSnapshot(leaderboardCol, (snapshot) => {
                 let players = [];
                 snapshot.forEach(docSnap => {
                     players.push(docSnap.data());
                 });
 
-                // Memory sorting
                 players.sort((a, b) => (b.auraPoints || 0) - (a.auraPoints || 0));
-
                 renderLeaderboardUI(players.slice(0, 10));
             }, (error) => {
                 console.warn("Leaderboard snapshot error:", error);
@@ -892,6 +887,7 @@
                     await setDoc(userDocRef, {
                         uid: currentUser.uid,
                         displayName: displayName,
+                        email: currentUser.email || 'guest@bakhi.com',
                         auraPoints: currentAuraPoints,
                         rankName: currentRank.name,
                         updatedAt: Date.now()
@@ -899,10 +895,9 @@
                 } catch (err) {
                     console.warn("Error saving score to Firestore:", err);
                 }
-            }, 1000); // 1 second debounce
+            }, 800);
         };
 
-        // Initialize Auth on Load
         initAuth();
     </script>
 
@@ -978,18 +973,18 @@
                     osc.start(now);
                     osc.stop(now + 0.7);
                 } else if (type === 'levelup') {
-                    const fanfareNotes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98]; // C5, E5, G5, C6, E6, G6
+                    const fanfareNotes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98, 2093.00];
                     fanfareNotes.forEach((freq, index) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(freq, now + index * 0.09);
-                        gain.gain.setValueAtTime(0.4, now + index * 0.09);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.09 + 0.6);
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + index * 0.07);
+                        gain.gain.setValueAtTime(0.45, now + index * 0.07);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.07 + 0.6);
                         osc.connect(gain);
                         gain.connect(audioCtx.destination);
-                        osc.start(now + index * 0.09);
-                        osc.stop(now + index * 0.09 + 0.6);
+                        osc.start(now + index * 0.07);
+                        osc.stop(now + index * 0.07 + 0.6);
                     });
                 }
             } catch (e) {}
@@ -1083,15 +1078,15 @@
         animateCanvas();
 
         const RANK_TIERS = [
-            { id: 0, min: 1, max: 36000, name: "Thằng Nghèo 💸", color: "text-slate-400" },
-            { id: 1, min: 36000, max: 70000, name: "Thần thái rau má 🌿", color: "text-emerald-400" },
-            { id: 2, min: 70000, max: 100000, name: "Sắp ngầu rồi 😎", color: "text-amber-400" },
-            { id: 3, min: 100000, max: 160000, name: "Bá khí 🔥", color: "text-orange-400" },
-            { id: 4, min: 160000, max: 250000, name: "Hoàng tử Bá khí 👑", color: "text-yellow-300" },
-            { id: 5, min: 250000, max: 300000, name: "Vua Bá khí ⚔️", color: "text-red-400" },
-            { id: 6, min: 300000, max: 400000, name: "Aura++💀", color: "text-purple-400" },
-            { id: 7, min: 400000, max: 500000, name: "Aura Prime ✨", color: "text-cyan-300" },
-            { id: 8, min: 500000, max: 700000, name: "Yara yara Aura Prime 🌌", color: "text-fuchsia-400" },
+            { id: 0, min: 1, max: 35999, name: "Thằng Nghèo 💸", color: "text-slate-400" },
+            { id: 1, min: 36000, max: 69999, name: "Thần thái rau má 🌿", color: "text-emerald-400" },
+            { id: 2, min: 70000, max: 99999, name: "Sắp ngầu rồi 😎", color: "text-amber-400" },
+            { id: 3, min: 100000, max: 159999, name: "Bá khí 🔥", color: "text-orange-400" },
+            { id: 4, min: 160000, max: 249999, name: "Hoàng tử Bá khí 👑", color: "text-yellow-300" },
+            { id: 5, min: 250000, max: 299999, name: "Vua Bá khí ⚔️", color: "text-red-400" },
+            { id: 6, min: 300000, max: 399999, name: "Aura++💀", color: "text-purple-400" },
+            { id: 7, min: 400000, max: 499999, name: "Aura Prime ✨", color: "text-cyan-300" },
+            { id: 8, min: 500000, max: 699999, name: "Yara yara Aura Prime 🌌", color: "text-fuchsia-400" },
             { id: 9, min: 700000, max: Infinity, name: "Trần Bình Prime 2019💀", color: "text-rose-500 font-black animate-pulse" }
         ];
 
@@ -1142,13 +1137,12 @@
                 const percentage = Math.min(100, Math.max(0.1, (currentProgress / range) * 100));
                 
                 rankProgressBar.style.width = `${percentage}%`;
-                rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} / ${currentRank.max.toLocaleString()} AP`;
+                rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} / ${nextRank.min.toLocaleString()} AP`;
             } else {
                 rankProgressBar.style.width = `100%`;
                 rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} AP (MAX RANK)`;
             }
 
-            // Sync score to Firestore Cloud
             if (window.saveScoreToCloudThrottled) {
                 window.saveScoreToCloudThrottled();
             }
@@ -1163,8 +1157,8 @@
 
             toast.classList.remove('hidden');
 
-            for (let i = 0; i < 120; i++) {
-                particles.push(new Particle(window.innerWidth / 2, window.innerHeight / 2, true, 3));
+            for (let i = 0; i < 140; i++) {
+                particles.push(new Particle(window.innerWidth / 2, window.innerHeight / 2, true, 3.5));
             }
 
             mainCard.classList.remove('shake-effect', 'mega-shake-effect');
