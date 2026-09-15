@@ -240,10 +240,8 @@
 </head>
 <body class="min-h-screen relative flex flex-col items-center justify-between p-3 sm:p-6 md:p-8">
 
-    <!-- Interactive Particle Background Canvas -->
     <canvas id="aura-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <!-- Background Glow Orbs -->
     <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/25 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/20 rounded-full blur-[120px] pointer-events-none"></div>
@@ -268,7 +266,6 @@
                 ⚡ DƯƠNG AURA BÁ KHÍ
             </span>
         </div>
-        <!-- User Account Bar -->
         <div id="auth-status-container" class="flex items-center gap-2">
             <button id="open-auth-modal-btn" onclick="openAuthModal()" class="px-4 py-2 rounded-xl bg-slate-900/90 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 font-extrabold text-xs shadow-lg transition hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer">
                 <i class="fa-solid fa-user-astronaut text-sm"></i>
@@ -277,22 +274,21 @@
         </div>
     </header>
 
+    <!-- AUTH MODAL -->
     <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
         <div class="glass-aura-card w-full max-w-md p-6 rounded-3xl relative border border-purple-500/50 shadow-2xl">
             <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Auth Form Header -->
             <div class="text-center mb-6">
                 <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-2xl mx-auto mb-2 animate-pulse">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 <h3 class="font-display font-black text-xl text-white aura-text-gradient">AURA CLOUD ACCOUNT</h3>
-                <p class="text-xs text-slate-400">Lưu tiến trình Bá Khí và so tài trên Bảng Xếp Hạng!</p>
+                <p class="text-xs text-slate-400">Lưu tiến trình Bá Khí và so tài trên Bảng Xếp Hạng Vũ Trụ!</p>
             </div>
 
-            <!-- Logged In State View -->
             <div id="logged-in-view" class="hidden text-center space-y-4">
                 <div class="p-4 rounded-2xl bg-slate-900/80 border border-cyan-500/40">
                     <div class="text-xs text-slate-400 uppercase font-bold">Tài Khoản Hiện Tại</div>
@@ -304,7 +300,6 @@
                 </button>
             </div>
 
-            <!-- Auth Tabs (Login / Register) -->
             <div id="auth-form-view">
                 <div class="flex border-b border-slate-800 mb-4">
                     <button id="tab-login-btn" onclick="switchAuthTab('login')" class="w-1/2 py-2 text-xs font-black uppercase text-cyan-400 border-b-2 border-cyan-400 pb-2 transition">Đăng Nhập</button>
@@ -337,7 +332,6 @@
 
     <main id="main-card" class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-5 sm:p-8 md:p-10 my-auto transition-all duration-300">
         
-        <!-- Header Crown Badge -->
         <div class="flex justify-center mb-6">
             <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/90 border border-purple-500/50 text-purple-300 text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-lg shadow-purple-950/60 animate-float">
                 <i class="fa-solid fa-crown text-amber-400 text-base animate-bounce"></i>
@@ -348,12 +342,11 @@
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center">
             
-            <!-- Photo Column -->
+            <!-- PHOTO HERO CONTAINER -->
             <div class="md:col-span-5 flex flex-col items-center">
                 <div id="photo-container" class="aura-wrapper w-64 h-64 sm:w-72 sm:h-72 md:w-full md:h-80 group cursor-pointer transition-transform duration-300 active:scale-95" onclick="triggerAuraBurst(event, 1)">
                     <div class="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-950 relative flex items-center justify-center">
                         
-                        <!-- User Image (1000154590_3.jpg with SVG fallback) -->
                         <img 
                             id="duong-photo"
                             src="1000154590_3.jpg" 
@@ -362,7 +355,6 @@
                             onerror="handlePhotoError(this)"
                         >
 
-                        <!-- Fallback Vector Artwork SVG -->
                         <div id="photo-fallback" class="hidden absolute inset-0 bg-gradient-to-br from-purple-950 via-slate-900 to-cyan-950 flex flex-col items-center justify-center p-6 text-center">
                             <div class="w-24 h-24 rounded-full bg-purple-500/20 border-2 border-purple-400/50 flex items-center justify-center text-amber-400 mb-3 animate-pulse">
                                 <svg class="w-16 h-16 text-cyan-300 fill-current" viewBox="0 0 24 24">
@@ -387,7 +379,7 @@
                 </div>
             </div>
 
-            <!-- Details Column -->
+            <!-- HERO INFORMATION & ACTION BUTTONS -->
             <div class="md:col-span-7 space-y-4 text-center md:text-left">
                 <div>
                     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-2">
@@ -404,10 +396,10 @@
                 </p>
 
                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium bg-slate-950/60 p-3.5 rounded-2xl border border-purple-500/20 backdrop-blur-sm shadow-inner">
-                    "Dương - người sở hữu <span class="text-purple-300 font-bold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình."
+                    "Dương - người sở hữu <span class="text-purple-300 font-bold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ."
                 </p>
 
-                <!-- Stats Grid with DYNAMIC RANK SYSTEM -->
+                <!-- STATS & RANK PROGRESS -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
                     <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 text-center transition hover:border-purple-500/80 hover:bg-slate-900">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Aura Bá Khí</div>
@@ -430,7 +422,6 @@
                     </div>
                 </div>
 
-                <!-- Rank Progress Bar -->
                 <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
                     <div class="flex justify-between text-[11px] font-bold mb-1">
                         <span class="text-slate-400">Tiến Trình Thần Thái:</span>
@@ -441,8 +432,8 @@
                     </div>
                 </div>
 
+                <!-- ACTION CLICKER BUTTONS -->
                 <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3">
-                    <!-- Bộc Phá Aura Main Button (+1 AP - NO COOLDOWN) -->
                     <button 
                         id="burst-btn" 
                         onclick="triggerAuraBurst(event, 1)" 
@@ -453,22 +444,20 @@
                         <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shimmer"></div>
                     </button>
 
-                    <!-- Quick Boost Buttons (+100 & +500 - NO COOLDOWN) -->
                     <button 
                         onclick="triggerAuraBurst(event, 100)" 
                         class="px-3.5 py-3 rounded-xl bg-purple-950/80 border border-purple-500/50 hover:border-purple-400 text-purple-300 font-extrabold text-xs shadow-lg hover:bg-purple-900/80 hover:scale-105 active:scale-95 transition cursor-pointer"
                     >
-                        ⚡ +100
+                        ⚡ +100 AP
                     </button>
 
                     <button 
                         onclick="triggerAuraBurst(event, 500)" 
                         class="px-3.5 py-3 rounded-xl bg-amber-950/80 border border-amber-500/50 hover:border-amber-400 text-amber-300 font-extrabold text-xs shadow-lg hover:bg-amber-900/80 hover:scale-105 active:scale-95 transition cursor-pointer"
                     >
-                        🔥 +500
+                        🔥 +500 AP
                     </button>
 
-                    <!-- Aura Counter Widget -->
                     <div class="aura-counter-box px-4 py-2 rounded-2xl flex items-center gap-3 transition-all duration-300">
                         <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-amber-400 text-sm animate-pulse">
                             <i class="fa-solid fa-fire-flame-curved"></i>
@@ -481,11 +470,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <section class="mt-8 pt-6 border-t border-purple-500/30">
@@ -619,15 +605,14 @@
                     <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping" title="Live Sync Active"></span>
                 </div>
 
-                <!-- Leaderboard Table List -->
                 <div class="bg-slate-950/80 rounded-xl border border-purple-500/30 overflow-hidden">
                     <div class="grid grid-cols-12 px-4 py-2.5 bg-slate-900/90 border-b border-slate-800 text-[11px] font-black uppercase text-slate-400 tracking-wider">
                         <div class="col-span-2 text-center">Hạng</div>
                         <div class="col-span-5">Người Chơi</div>
                         <div class="col-span-5 text-right">Điểm Aura</div>
                     </div>
-                    <div id="leaderboard-rows" class="divide-y divide-slate-800/60 text-xs font-semibold">
-                        <div class="px-4 py-3 text-center text-slate-500 animate-pulse">Đang tải dữ liệu Bảng Xếp Hạng...</div>
+                    <div id="leaderboard-rows" class="divide-y divide-slate-800/60 text-xs font-semibold max-h-96 overflow-y-auto">
+                        <div class="px-4 py-3 text-center text-slate-500 animate-pulse">Đang kết nối Cloud & Tải Bảng Xếp Hạng...</div>
                     </div>
                 </div>
             </div>
@@ -640,7 +625,6 @@
             <span>© 2026 DƯƠNG • Supreme Vibe & Aura</span>
         </div>
         
-        <!-- Web By Meoww Signature Banner + Subtitle -->
         <div class="flex flex-col items-center">
             <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-pink-500/60 shadow-xl shadow-pink-950/60 hover:border-pink-400 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <i class="fa-solid fa-cat text-pink-400 text-lg animate-bounce"></i>
@@ -664,10 +648,9 @@
             signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { 
-            getFirestore, doc, setDoc, collection, onSnapshot 
+            getFirestore, doc, setDoc, getDoc, collection, onSnapshot 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // EMBEDDED FIREBASE CONFIG CREDENTIALS
         const embeddedFirebaseConfig = {
             apiKey: "AIzaSyAJMqGogLpTxIzkVl4ueKHHoEPoQhtsMS4",
             authDomain: "duong-603a4.firebaseapp.com",
@@ -685,7 +668,7 @@
                 const parsed = JSON.parse(__firebase_config);
                 if (parsed && parsed.apiKey) firebaseConfig = parsed;
             }
-        } catch(e) { console.warn('Firebase config override parse notice:', e); }
+        } catch(e) { console.warn('Firebase config override notice:', e); }
 
         let app, auth, db;
         try {
@@ -717,11 +700,38 @@
                 }
             }
 
-            onAuthStateChanged(auth, (user) => {
+            onAuthStateChanged(auth, async (user) => {
                 currentUser = user;
                 updateAuthUI();
+
                 if (currentUser) {
-                    saveScoreToCloudThrottled();
+                    try {
+                        // Strict Path RULE 1 compliant
+                        const userDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'leaderboard', currentUser.uid);
+                        const docSnap = await getDoc(userDocRef);
+                        
+                        let cloudPoints = 0;
+                        if (docSnap.exists()) {
+                            cloudPoints = docSnap.data().auraPoints || 0;
+                        }
+
+                        const localSavedPoints = parseInt(localStorage.getItem('duong_aura_points') || '1', 10);
+                        const validLocalPoints = isNaN(localSavedPoints) ? 1 : localSavedPoints;
+
+                        // Retain max AP across refresh
+                        window.currentAuraPoints = Math.max(window.currentAuraPoints || 1, validLocalPoints, cloudPoints, 1);
+                        
+                        localStorage.setItem('duong_aura_points', window.currentAuraPoints.toString());
+                        if (window.updateRankSystem) window.updateRankSystem();
+
+                    } catch (err) {
+                        console.warn("Error restoring user score from Cloud:", err);
+                    } finally {
+                        window.isSyncInitialized = true;
+                        window.saveScoreToCloudThrottled();
+                    }
+                } else {
+                    window.isSyncInitialized = true;
                 }
             });
 
@@ -815,18 +825,20 @@
         let leaderboardUnsubscribe = null;
         function setupLeaderboardListener() {
             if (!db) return;
-            // RULE 1 Strict Path: /artifacts/{appId}/public/data/{collectionName}
+            
+            // RULE 1 Strict Path: /artifacts/{appId}/public/data/leaderboard
             const leaderboardCol = collection(db, 'artifacts', appId, 'public', 'data', 'leaderboard');
             
-            // RULE 2: No complex queries with orderBy/limit in Firestore. Fetch collection and sort in JS memory!
+            // RULE 2: Simple query without composite index orderBy, sorted client-side!
             leaderboardUnsubscribe = onSnapshot(leaderboardCol, (snapshot) => {
                 let players = [];
                 snapshot.forEach(docSnap => {
                     players.push(docSnap.data());
                 });
 
+                // Client-side JavaScript sorting descending by AP
                 players.sort((a, b) => (b.auraPoints || 0) - (a.auraPoints || 0));
-                renderLeaderboardUI(players.slice(0, 10));
+                renderLeaderboardUI(players.slice(0, 50));
             }, (error) => {
                 console.warn("Leaderboard snapshot error:", error);
             });
@@ -837,19 +849,19 @@
             if (!container) return;
 
             if (topPlayers.length === 0) {
-                container.innerHTML = `<div class="px-4 py-3 text-center text-slate-500">Chưa có ai trên bảng xếp hạng. Hãy là người đầu tiên!</div>`;
+                container.innerHTML = `<div class="px-4 py-3 text-center text-slate-500">Chưa có ai trên bảng xếp hạng. Hãy bộc phá Aura đầu tiên!</div>`;
                 return;
             }
 
             container.innerHTML = topPlayers.map((p, idx) => {
                 let badge = `#${idx + 1}`;
                 let badgeColor = "text-slate-400 font-bold";
-                if (idx === 0) { badge = "🥇 #1"; badgeColor = "text-amber-400 font-black text-sm"; }
+                if (idx === 0) { badge = "🥇 #1"; badgeColor = "text-amber-400 font-black text-sm animate-pulse"; }
                 else if (idx === 1) { badge = "🥈 #2"; badgeColor = "text-slate-200 font-black text-xs"; }
                 else if (idx === 2) { badge = "🥉 #3"; badgeColor = "text-amber-600 font-black text-xs"; }
 
                 const isSelf = currentUser && currentUser.uid === p.uid;
-                const highlightClass = isSelf ? "bg-purple-950/70 border-l-4 border-cyan-400 font-bold" : "hover:bg-slate-900/60";
+                const highlightClass = isSelf ? "bg-purple-950/70 border-l-4 border-cyan-400 font-bold shadow-md" : "hover:bg-slate-900/60";
 
                 return `
                     <div class="grid grid-cols-12 px-4 py-3 items-center ${highlightClass} transition">
@@ -874,28 +886,27 @@
 
         let cloudSaveTimeout = null;
         window.saveScoreToCloudThrottled = function() {
-            if (!db || !currentUser) return;
+            if (!window.isSyncInitialized || !db || !currentUser) return;
 
             clearTimeout(cloudSaveTimeout);
             cloudSaveTimeout = setTimeout(async () => {
                 try {
                     const displayName = currentUser.displayName || (currentUser.isAnonymous ? "Khách Bá Khí" : currentUser.email.split('@')[0]);
-                    const currentRank = getCurrentRankObject();
+                    const currentRank = window.getCurrentRankObject ? window.getCurrentRankObject() : { name: "Thằng Nghèo 💸" };
 
-                    // RULE 1 Strict Path for public leaderboard data
                     const userDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'leaderboard', currentUser.uid);
                     await setDoc(userDocRef, {
                         uid: currentUser.uid,
                         displayName: displayName,
                         email: currentUser.email || 'guest@bakhi.com',
-                        auraPoints: currentAuraPoints,
+                        auraPoints: window.currentAuraPoints,
                         rankName: currentRank.name,
                         updatedAt: Date.now()
                     }, { merge: true });
                 } catch (err) {
                     console.warn("Error saving score to Firestore:", err);
                 }
-            }, 800);
+            }, 600);
         };
 
         initAuth();
@@ -1090,9 +1101,11 @@
             { id: 9, min: 700000, max: Infinity, name: "Trần Bình Prime 2019💀", color: "text-rose-500 font-black animate-pulse" }
         ];
 
-        let currentAuraPoints = 1;
+        const initialSavedPoints = parseInt(localStorage.getItem('duong_aura_points') || '1', 10);
+        window.currentAuraPoints = isNaN(initialSavedPoints) || initialSavedPoints < 1 ? 1 : initialSavedPoints;
+        window.isSyncInitialized = false;
         let activeRankIndex = 0;
-        
+
         const counterElement = document.getElementById('aura-count');
         const rankTitleElement = document.getElementById('aura-rank-title');
         const rankProgressBar = document.getElementById('rank-progress-bar');
@@ -1100,23 +1113,23 @@
         const mainCard = document.getElementById('main-card');
         const photoContainer = document.getElementById('photo-container');
 
-        function getCurrentRankObject() {
+        window.getCurrentRankObject = function() {
             let currentRank = RANK_TIERS[0];
             for (let i = 0; i < RANK_TIERS.length; i++) {
-                if (currentAuraPoints >= RANK_TIERS[i].min) {
+                if (window.currentAuraPoints >= RANK_TIERS[i].min) {
                     currentRank = RANK_TIERS[i];
                 }
             }
             return currentRank;
-        }
+        };
 
-        function updateRankSystem() {
+        window.updateRankSystem = function() {
             let currentRank = RANK_TIERS[0];
             let nextRank = RANK_TIERS[1];
             let newRankIndex = 0;
 
             for (let i = 0; i < RANK_TIERS.length; i++) {
-                if (currentAuraPoints >= RANK_TIERS[i].min) {
+                if (window.currentAuraPoints >= RANK_TIERS[i].min) {
                     currentRank = RANK_TIERS[i];
                     nextRank = RANK_TIERS[i + 1] || null;
                     newRankIndex = i;
@@ -1128,25 +1141,29 @@
             }
             activeRankIndex = newRankIndex;
 
+            counterElement.textContent = window.currentAuraPoints.toLocaleString();
             rankTitleElement.textContent = currentRank.name;
             rankTitleElement.className = `text-xs sm:text-sm font-black transition-all duration-300 ${currentRank.color}`;
             
-            if (nextRank && nextRank.max !== Infinity) {
-                const range = currentRank.max - currentRank.min;
-                const currentProgress = currentAuraPoints - currentRank.min;
+            if (nextRank && nextRank.min !== Infinity) {
+                const range = nextRank.min - currentRank.min;
+                const currentProgress = window.currentAuraPoints - currentRank.min;
                 const percentage = Math.min(100, Math.max(0.1, (currentProgress / range) * 100));
                 
                 rankProgressBar.style.width = `${percentage}%`;
-                rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} / ${nextRank.min.toLocaleString()} AP`;
+                rankProgressText.textContent = `${window.currentAuraPoints.toLocaleString()} / ${nextRank.min.toLocaleString()} AP`;
             } else {
                 rankProgressBar.style.width = `100%`;
-                rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} AP (MAX RANK)`;
+                rankProgressText.textContent = `${window.currentAuraPoints.toLocaleString()} AP (MAX RANK)`;
             }
 
-            if (window.saveScoreToCloudThrottled) {
+            // Immediately persist locally
+            localStorage.setItem('duong_aura_points', window.currentAuraPoints.toString());
+
+            if (window.isSyncInitialized && window.saveScoreToCloudThrottled) {
                 window.saveScoreToCloudThrottled();
             }
-        }
+        };
 
         function triggerRankLevelUpCelebration(rankObj) {
             playAuraSound('levelup');
@@ -1170,7 +1187,7 @@
             }, 3500);
         }
 
-        updateRankSystem();
+        window.updateRankSystem();
 
         function handleCooldownAction(btnElement, seconds, actionCallback) {
             if (btnElement.classList.contains('btn-cooldown')) return;
@@ -1207,10 +1224,8 @@
         function triggerAuraBurst(event, amount = 1) {
             playAuraSound('burst');
 
-            currentAuraPoints += amount;
-            counterElement.textContent = currentAuraPoints.toLocaleString();
-
-            updateRankSystem();
+            window.currentAuraPoints += amount;
+            window.updateRankSystem();
 
             counterElement.classList.remove('counter-bump');
             void counterElement.offsetWidth;
@@ -1241,9 +1256,8 @@
         function answerQuiz(event, auraBonus, choice) {
             playAuraSound(choice === 'A' ? 'quizA' : 'quizB');
 
-            currentAuraPoints += auraBonus;
-            counterElement.textContent = currentAuraPoints.toLocaleString();
-            updateRankSystem();
+            window.currentAuraPoints += auraBonus;
+            window.updateRankSystem();
 
             const feedbackEl = document.getElementById('quiz-feedback');
             feedbackEl.classList.remove('hidden');
@@ -1271,9 +1285,8 @@
         function selectStoryChoice(event, auraBonus, choiceNumber) {
             playAuraSound(choiceNumber === 1 ? 'choice1' : 'choice2');
 
-            currentAuraPoints += auraBonus;
-            counterElement.textContent = currentAuraPoints.toLocaleString();
-            updateRankSystem();
+            window.currentAuraPoints += auraBonus;
+            window.updateRankSystem();
 
             const feedbackEl = document.getElementById('story-feedback');
             feedbackEl.classList.remove('hidden');
@@ -1318,4 +1331,3 @@
     </script>
 </body>
 </html>
-```
