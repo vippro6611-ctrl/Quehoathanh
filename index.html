@@ -62,6 +62,7 @@
         }
     </script>
 
+    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -76,7 +77,6 @@
             overflow-x: hidden;
         }
 
-        /* Dynamic Animated Text Gradients */
         .aura-text-gradient {
             background: linear-gradient(135deg, #a855f7 0%, #38bdf8 35%, #fbbf24 70%, #ec4899 100%);
             background-size: 250% auto;
@@ -98,7 +98,6 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* Glassmorphic Main Cards */
         .glass-aura-card {
             background: rgba(15, 23, 42, 0.88);
             backdrop-filter: blur(28px);
@@ -119,7 +118,12 @@
             box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
         }
 
-        /* RGB Dynamic Glow Frame around Photo */
+        .leaderboard-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.95));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+
         .aura-wrapper {
             position: relative;
             border-radius: 2rem;
@@ -148,7 +152,6 @@
             100% { filter: blur(32px) opacity(1); }
         }
 
-        /* Screen Shake Effects */
         .shake-effect {
             animation: screenShake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
         }
@@ -171,7 +174,6 @@
             40%, 60% { transform: translate3d(9px, -7px, 0) scale(0.99); }
         }
 
-        /* Shockwave pulse frame */
         .shockwave-flash::after {
             content: '';
             position: absolute;
@@ -189,7 +191,6 @@
             100% { transform: scale(1.35); opacity: 0; border-color: #ec4899; }
         }
 
-        /* Dynamic Floating Combat Text */
         .floating-aura-text {
             position: fixed;
             pointer-events: none;
@@ -209,7 +210,6 @@
             100% { opacity: 0; transform: translate(-50%, -105px) scale(0.8) rotate(5deg); }
         }
 
-        /* Aura Counter Box */
         .aura-counter-box {
             background: linear-gradient(135deg, rgba(30, 27, 75, 0.9), rgba(15, 23, 42, 0.95));
             border: 1px solid rgba(6, 182, 212, 0.5);
@@ -226,7 +226,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Cooldown Button Disabled Styling */
         .btn-cooldown {
             pointer-events: none !important;
             opacity: 0.55 !important;
@@ -234,7 +233,6 @@
             cursor: not-allowed !important;
         }
 
-        /* Custom Scrollbars */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #030712; }
         ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 4px; }
@@ -243,10 +241,10 @@
 </head>
 <body class="min-h-screen relative flex flex-col items-center justify-between p-3 sm:p-6 md:p-8">
 
-    <!-- Interactive Canvas Particle Background -->
+    <!-- Interactive Particle Background Canvas -->
     <canvas id="aura-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <!-- Background Ambient Glow Orbs -->
+    <!-- Background Glow Orbs -->
     <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/25 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
     <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-amber-500/20 rounded-full blur-[120px] pointer-events-none"></div>
@@ -265,7 +263,79 @@
         </div>
     </div>
 
-    <!-- Main Glass Showcase Card Container -->
+    <header class="relative z-20 w-full max-w-4xl flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-3 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/50 text-purple-300 shadow-lg uppercase tracking-wider">
+                ⚡ DƯƠNG AURA BÁ KHÍ
+            </span>
+        </div>
+        <!-- User Account Bar -->
+        <div id="auth-status-container" class="flex items-center gap-2">
+            <button id="open-auth-modal-btn" onclick="openAuthModal()" class="px-4 py-2 rounded-xl bg-slate-900/90 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 font-extrabold text-xs shadow-lg transition hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-user-astronaut text-sm"></i>
+                <span id="auth-btn-text">Đăng Nhập / Đăng Ký</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
+        <div class="glass-aura-card w-full max-w-md p-6 rounded-3xl relative border border-purple-500/50 shadow-2xl">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Auth Form Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-2xl mx-auto mb-2 animate-pulse">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-display font-black text-xl text-white aura-text-gradient">AURA CLOUD ACCOUNT</h3>
+                <p class="text-xs text-slate-400">Lưu tiến trình Bá Khí và so tài trên Bảng Xếp Hạng!</p>
+            </div>
+
+            <!-- Logged In State View -->
+            <div id="logged-in-view" class="hidden text-center space-y-4">
+                <div class="p-4 rounded-2xl bg-slate-900/80 border border-cyan-500/40">
+                    <div class="text-xs text-slate-400 uppercase font-bold">Tài Khoản Hiện Tại</div>
+                    <div id="user-display-name-label" class="text-lg font-black text-cyan-300 mt-1">Player</div>
+                    <div id="user-email-label" class="text-xs text-slate-400 font-mono">user@example.com</div>
+                </div>
+                <button onclick="handleSignOut()" class="w-full py-3 rounded-xl bg-rose-950/80 border border-rose-500/50 text-rose-300 font-bold text-xs hover:bg-rose-900 transition cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket mr-2"></i>Đăng Xuất
+                </button>
+            </div>
+
+            <!-- Auth Tabs (Login / Register) -->
+            <div id="auth-form-view">
+                <div class="flex border-b border-slate-800 mb-4">
+                    <button id="tab-login-btn" onclick="switchAuthTab('login')" class="w-1/2 py-2 text-xs font-black uppercase text-cyan-400 border-b-2 border-cyan-400 pb-2 transition">Đăng Nhập</button>
+                    <button id="tab-register-btn" onclick="switchAuthTab('register')" class="w-1/2 py-2 text-xs font-bold uppercase text-slate-400 hover:text-slate-200 pb-2 transition">Đăng Ký</button>
+                </div>
+
+                <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3">
+                    <div id="name-field" class="hidden">
+                        <label class="text-[11px] font-bold text-slate-300 block mb-1">Tên Hiển Thị (Name):</label>
+                        <input type="text" id="auth-name" placeholder="Ví dụ: Dương Bá Vương" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-slate-300 block mb-1">Email:</label>
+                        <input type="email" id="auth-email" required placeholder="aura@bakhi.com" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-slate-300 block mb-1">Mật khẩu:</label>
+                        <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    </div>
+                    
+                    <div id="auth-error-msg" class="text-xs text-rose-400 font-bold hidden text-center"></div>
+
+                    <button type="submit" id="auth-submit-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-black text-xs uppercase tracking-wider shadow-lg hover:scale-[1.02] active:scale-95 transition cursor-pointer mt-2">
+                        Xác Nhận Đăng Nhập
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <main id="main-card" class="relative z-10 max-w-4xl w-full glass-aura-card rounded-3xl p-5 sm:p-8 md:p-10 my-auto transition-all duration-300">
         
         <!-- Header Crown Badge -->
@@ -277,7 +347,6 @@
             </div>
         </div>
 
-        <!-- Grid: Left Image & Right Details -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center">
             
             <!-- Photo Column -->
@@ -297,7 +366,6 @@
                         <!-- Fallback Vector Artwork SVG -->
                         <div id="photo-fallback" class="hidden absolute inset-0 bg-gradient-to-br from-purple-950 via-slate-900 to-cyan-950 flex flex-col items-center justify-center p-6 text-center">
                             <div class="w-24 h-24 rounded-full bg-purple-500/20 border-2 border-purple-400/50 flex items-center justify-center text-amber-400 mb-3 animate-pulse">
-                                <!-- Custom SVG Avatar of Person drinking from paper cup -->
                                 <svg class="w-16 h-16 text-cyan-300 fill-current" viewBox="0 0 24 24">
                                     <path d="M12 2a5 5 0 0 0-5 5v1a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5zm-1 11a7 7 0 0 0-7 7 1 1 0 0 0 1 1h12a1 1 0 0 0 1-1 7 7 0 0 0-7-7zm7.5-3.5l1.5.5a1 1 0 0 1 .5 1.3l-2 4a1 1 0 0 1-1.3.5l-1.5-.5a1 1 0 0 1-.5-1.3l2-4a1 1 0 0 1 1.3-.5z"/>
                                 </svg>
@@ -306,10 +374,8 @@
                             <p class="text-xs text-cyan-400 font-semibold mt-1">Thần Thái Ngụm Nước Bá Khí</p>
                         </div>
                         
-                        <!-- Dark Vignette Overlay -->
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         
-                        <!-- Floating Badges Over Photo -->
                         <div class="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-purple-500/40 px-3.5 py-2 rounded-xl flex items-center justify-between text-xs pointer-events-none">
                             <span class="text-slate-200 font-semibold flex items-center gap-1.5">
                                 <i class="fa-solid fa-glass-water text-cyan-400 animate-pulse"></i> Chill & Power
@@ -324,8 +390,6 @@
 
             <!-- Details Column -->
             <div class="md:col-span-7 space-y-4 text-center md:text-left">
-                
-                <!-- Main Title & Badge -->
                 <div>
                     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-2">
                         <span class="aura-text-gradient">DƯƠNG</span>
@@ -335,21 +399,17 @@
                     </div>
                 </div>
 
-                <!-- Tagline -->
                 <p class="text-xs sm:text-sm font-extrabold tracking-wide text-cyan-300/90 uppercase flex items-center justify-center md:justify-start gap-2">
                     <i class="fa-solid fa-bolt-lightning text-amber-400 text-sm animate-bounce"></i>
                     <span>PHONG THÁI ĐỈNH CÁO – AURA ÁP ĐẢO – THẦN THÁI NGÚT NGÀN</span>
                 </p>
 
-                <!-- Persona Quote / Description -->
                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium bg-slate-950/60 p-3.5 rounded-2xl border border-purple-500/20 backdrop-blur-sm shadow-inner">
-                    "Dương - người sở hữu <span class="text-purple-300 font-bold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình, khí chất lãnh đạo và sự tự tin không thể nhầm lẫn."
+                    "Dương - người sở hữu <span class="text-purple-300 font-bold">aura bá khí đỉnh cao</span>. Dù chỉ đơn giản là đang thưởng thức một ngụm nước, phong thái và khí chất phát ra vẫn đủ khiến người đối diện phải trầm trồ. Một ánh nhìn điềm tĩnh nhưng chứa đựng sức hút vô hình."
                 </p>
 
                 <!-- Stats Grid with DYNAMIC RANK SYSTEM -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-                    
-                    <!-- Stat 1: Aura Bá Khí % -->
                     <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl p-2.5 text-center transition hover:border-purple-500/80 hover:bg-slate-900">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Aura Bá Khí</div>
                         <div class="text-sm sm:text-base font-black text-purple-400 flex items-center justify-center gap-1">
@@ -358,7 +418,6 @@
                         </div>
                     </div>
 
-                    <!-- Stat 2: Dynamic Aura Rank -->
                     <div id="rank-card" class="bg-slate-900/90 border border-slate-600/50 rounded-xl p-2.5 text-center transition-all duration-300">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Thần Thái Rank</div>
                         <div id="aura-rank-title" class="text-xs sm:text-sm font-black text-slate-400 transition-all duration-300">
@@ -366,7 +425,6 @@
                         </div>
                     </div>
 
-                    <!-- Stat 3: Phong Thái -->
                     <div class="bg-slate-900/80 border border-amber-500/30 rounded-xl p-2.5 text-center transition hover:border-amber-500/80 hover:bg-slate-900">
                         <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-bold tracking-wider mb-0.5">Phong Thái</div>
                         <div class="text-[11px] sm:text-xs font-black text-amber-300 mt-0.5">Điềm Tĩnh & Cuốn Hút</div>
@@ -384,9 +442,7 @@
                     </div>
                 </div>
 
-                <!-- Instant Action & Counter Bar (No Cooldown for these) -->
                 <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3">
-                    
                     <!-- Bộc Phá Aura Main Button (+1 AP - NO COOLDOWN) -->
                     <button 
                         id="burst-btn" 
@@ -433,7 +489,6 @@
 
         </div>
 
-        <!-- Interactive Quiz Section: "Dương có bá khí không?" (WITH 3S COOLDOWN) -->
         <section class="mt-8 pt-6 border-t border-purple-500/30">
             <div class="quiz-card rounded-2xl p-5 sm:p-7 relative overflow-hidden">
                 <div class="flex items-center gap-3 mb-4">
@@ -454,9 +509,7 @@
                     </p>
                 </div>
 
-                <!-- Quiz Options (3 Seconds Cooldown) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <!-- Option A: +3,600 AP (3s Cooldown) -->
                     <button 
                         id="quiz-btn-a"
                         onclick="handleCooldownAction(this, 3, (e) => answerQuiz(e, 3600, 'A'))" 
@@ -469,7 +522,6 @@
                         <p class="text-xs text-slate-200 font-bold btn-sub">A. Có ✨</p>
                     </button>
 
-                    <!-- Option B: +10,000 AP (3s Cooldown) -->
                     <button 
                         id="quiz-btn-b"
                         onclick="handleCooldownAction(this, 3, (e) => answerQuiz(e, 10000, 'B'))" 
@@ -483,20 +535,16 @@
                     </button>
                 </div>
 
-                <!-- Quiz Response Display -->
                 <div id="quiz-feedback" class="hidden mt-3 p-3 rounded-xl bg-slate-900/90 border border-purple-500/40 text-center text-xs font-bold text-purple-300"></div>
             </div>
         </section>
 
-        <!-- Interactive Story Section: Sử Thi Ngụm Nước Vũ Trụ (WITH 3S COOLDOWN) -->
         <section class="mt-6 pt-2">
             <div class="story-codex-card rounded-2xl p-5 sm:p-7 relative overflow-hidden">
-                <!-- Background Glowing Emblem -->
                 <div class="absolute -right-8 -bottom-8 opacity-10 text-amber-400 text-9xl pointer-events-none">
                     <i class="fa-solid fa-scroll"></i>
                 </div>
 
-                <!-- Story Header -->
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 text-base shadow-lg">
                         <i class="fa-solid fa-book-journal-whills"></i>
@@ -510,7 +558,6 @@
                     </div>
                 </div>
 
-                <!-- Narrative Text -->
                 <div class="space-y-2.5 text-slate-300 text-xs sm:text-sm leading-relaxed font-normal bg-slate-950/70 p-4 rounded-xl border border-amber-500/20 backdrop-blur-md mb-4">
                     <p class="first-letter:text-3xl first-letter:font-black first-letter:text-amber-400 first-letter:float-left first-letter:mr-2">
                         Tương truyền vào một chiều bình dị, khi vạn vật đang chìm vào tĩnh lặng, <strong class="text-cyan-300 font-extrabold">Dương</strong> từ từ nâng chiếc cốc giấy lên. Không cần dùng đến binh khí hay thần chú, chỉ bằng một ngụm nước nhẹ nhàng, luồng <strong class="text-purple-300 font-extrabold">Aura Bá Khí</strong> bùng nổ vọt lên không trung!
@@ -520,13 +567,11 @@
                     </p>
                 </div>
 
-                <!-- Story Interaction Choices (3 Seconds Cooldown) -->
                 <div class="space-y-2.5">
                     <div class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
                         <i class="fa-solid fa-hand-holding-hand text-cyan-400"></i> Hỗ Trợ Dương Bá Khí (Hồi chiêu 3s):
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <!-- Story Choice 1: +5,000 Aura (3s Cooldown) -->
                         <button 
                             id="story-btn-1"
                             onclick="handleCooldownAction(this, 3, (e) => selectStoryChoice(e, 5000, 1))" 
@@ -539,7 +584,6 @@
                             <p class="text-xs text-slate-100 font-bold btn-sub">⚡ Tiếp thêm sức mạnh cho Dương</p>
                         </button>
 
-                        <!-- Story Choice 2: +12,300 Aura (3s Cooldown) -->
                         <button 
                             id="story-btn-2"
                             onclick="handleCooldownAction(this, 3, (e) => selectStoryChoice(e, 12300, 2))" 
@@ -553,26 +597,60 @@
                         </button>
                     </div>
                     
-                    <!-- Story Feedback Display -->
                     <div id="story-feedback" class="hidden mt-3 p-3 rounded-xl bg-slate-900/90 border border-amber-500/40 text-center text-xs font-bold text-amber-300"></div>
                 </div>
 
             </div>
         </section>
 
+        <section class="mt-8 pt-6 border-t border-purple-500/30">
+            <div class="leaderboard-card rounded-2xl p-5 sm:p-7 relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 text-lg shadow-lg">
+                            <i class="fa-solid fa-trophy animate-bounce"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-display font-black text-base sm:text-lg text-amber-300 uppercase tracking-wider">
+                                BẢNG XẾP HẠNG BÁ KHÍ VŨ TRỤ
+                            </h2>
+                            <p class="text-xs text-slate-400">Cập nhật thời gian thực trên mọi thiết bị qua Cloud</p>
+                        </div>
+                    </div>
+                    <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping" title="Live Sync Active"></span>
+                </div>
+
+                <!-- Leaderboard Table List -->
+                <div class="bg-slate-950/80 rounded-xl border border-purple-500/30 overflow-hidden">
+                    <div class="grid grid-cols-12 px-4 py-2.5 bg-slate-900/90 border-b border-slate-800 text-[11px] font-black uppercase text-slate-400 tracking-wider">
+                        <div class="col-span-2 text-center">Hạng</div>
+                        <div class="col-span-5">Người Chơi</div>
+                        <div class="col-span-5 text-right">Điểm Aura</div>
+                    </div>
+                    <div id="leaderboard-rows" class="divide-y divide-slate-800/60 text-xs font-semibold">
+                        <div class="px-4 py-3 text-center text-slate-500 animate-pulse">Đang tải dữ liệu Bảng Xếp Hạng...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Footer Section with "Web By Meoww" Badge -->
     <footer class="relative z-10 w-full max-w-4xl mt-6 pt-4 pb-2 border-t border-slate-800/80 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-2 text-slate-400 font-medium">
             <span>© 2026 DƯƠNG • Supreme Vibe & Aura</span>
         </div>
         
-        <!-- Web By Meoww Signature Banner -->
-        <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-pink-500/60 shadow-xl shadow-pink-950/60 hover:border-pink-400 transition-all duration-300 hover:scale-105 cursor-pointer">
-            <i class="fa-solid fa-cat text-pink-400 text-lg animate-bounce"></i>
-            <span class="meoww-text-gradient font-black tracking-widest text-sm sm:text-base uppercase">Web By Meoww</span>
-            <i class="fa-solid fa-sparkles text-amber-400 text-xs animate-spin"></i>
+        <!-- Web By Meoww Signature Banner + Subtitle -->
+        <div class="flex flex-col items-center">
+            <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-pink-500/60 shadow-xl shadow-pink-950/60 hover:border-pink-400 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <i class="fa-solid fa-cat text-pink-400 text-lg animate-bounce"></i>
+                <span class="meoww-text-gradient font-black tracking-widest text-sm sm:text-base uppercase">Web By Meoww</span>
+                <i class="fa-solid fa-sparkles text-amber-400 text-xs animate-spin"></i>
+            </div>
+            <span class="text-[11px] font-bold text-purple-400/90 mt-1 italic tracking-wide">
+                dùng Auto click là Femboy~
+            </span>
         </div>
 
         <div class="text-purple-400 font-bold flex items-center gap-1.5">
@@ -580,8 +658,255 @@
         </div>
     </footer>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, signInAnonymously, signInWithCustomToken, createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, doc, setDoc, collection, onSnapshot 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'duong-aura-bakhi-app';
+        let firebaseConfig = null;
+        try {
+            if (typeof __firebase_config !== 'undefined') {
+                firebaseConfig = JSON.parse(__firebase_config);
+            }
+        } catch(e) { console.warn('Firebase config parse error:', e); }
+
+        if (!firebaseConfig) {
+            firebaseConfig = {
+                apiKey: "AIzaSyDemoFallbackKeyForTestingOnly",
+                authDomain: "demo-app.firebaseapp.com",
+                projectId: "demo-app",
+                storageBucket: "demo-app.appspot.com",
+                messagingSenderId: "123456789",
+                appId: "1:123456789:web:abcdef123456"
+            };
+        }
+
+        let app, auth, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } catch (err) {
+            console.error("Firebase init error:", err);
+        }
+
+        let currentUser = null;
+        let authTabMode = 'login'; // 'login' or 'register'
+
+        async function initAuth() {
+            if (!auth) return;
+
+            // Handle custom token if available
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    // Fallback to anonymous auth if not signed in
+                    if (!auth.currentUser) {
+                        await signInAnonymously(auth);
+                    }
+                }
+            } catch (err) {
+                console.warn("Auth initialization fallback:", err);
+                if (!auth.currentUser) {
+                    try { await signInAnonymously(auth); } catch(e){}
+                }
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user;
+                updateAuthUI();
+                if (currentUser) {
+                    saveScoreToCloudThrottled();
+                }
+            });
+
+            // Start listening to Leaderboard in Firestore
+            setupLeaderboardListener();
+        }
+
+        window.openAuthModal = function() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        };
+
+        window.closeAuthModal = function() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        };
+
+        window.switchAuthTab = function(mode) {
+            authTabMode = mode;
+            const loginBtn = document.getElementById('tab-login-btn');
+            const regBtn = document.getElementById('tab-register-btn');
+            const nameField = document.getElementById('name-field');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const errorMsg = document.getElementById('auth-error-msg');
+            errorMsg.classList.add('hidden');
+
+            if (mode === 'login') {
+                loginBtn.className = "w-1/2 py-2 text-xs font-black uppercase text-cyan-400 border-b-2 border-cyan-400 pb-2 transition";
+                regBtn.className = "w-1/2 py-2 text-xs font-bold uppercase text-slate-400 hover:text-slate-200 pb-2 transition";
+                nameField.classList.add('hidden');
+                submitBtn.textContent = "Xác Nhận Đăng Nhập";
+            } else {
+                regBtn.className = "w-1/2 py-2 text-xs font-black uppercase text-cyan-400 border-b-2 border-cyan-400 pb-2 transition";
+                loginBtn.className = "w-1/2 py-2 text-xs font-bold uppercase text-slate-400 hover:text-slate-200 pb-2 transition";
+                nameField.classList.remove('hidden');
+                submitBtn.textContent = "Tạo Tài Khoản Mới";
+            }
+        };
+
+        window.handleAuthSubmit = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            const name = document.getElementById('auth-name').value || "Bá Vương Dương";
+            const errorMsg = document.getElementById('auth-error-msg');
+            errorMsg.classList.add('hidden');
+
+            try {
+                if (authTabMode === 'register') {
+                    const res = await createUserWithEmailAndPassword(auth, email, password);
+                    await updateProfile(res.user, { displayName: name });
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                }
+                closeAuthModal();
+            } catch (err) {
+                errorMsg.textContent = err.message || "Lỗi đăng nhập/đăng ký!";
+                errorMsg.classList.remove('hidden');
+            }
+        };
+
+        window.handleSignOut = async function() {
+            try {
+                await signOut(auth);
+                await signInAnonymously(auth);
+                closeAuthModal();
+            } catch (err) {
+                console.error("Logout error:", err);
+            }
+        };
+
+        function updateAuthUI() {
+            const btnText = document.getElementById('auth-btn-text');
+            const loggedInView = document.getElementById('logged-in-view');
+            const authFormView = document.getElementById('auth-form-view');
+            const userNameLabel = document.getElementById('user-display-name-label');
+            const userEmailLabel = document.getElementById('user-email-label');
+
+            if (currentUser && !currentUser.isAnonymous) {
+                const displayName = currentUser.displayName || currentUser.email.split('@')[0];
+                btnText.textContent = displayName;
+                userNameLabel.textContent = displayName;
+                userEmailLabel.textContent = currentUser.email;
+
+                loggedInView.classList.remove('hidden');
+                authFormView.classList.add('hidden');
+            } else {
+                btnText.textContent = "Đăng Nhập / Đăng Ký";
+                loggedInView.classList.add('hidden');
+                authFormView.classList.remove('hidden');
+            }
+        }
+
+        let leaderboardUnsubscribe = null;
+        function setupLeaderboardListener() {
+            if (!db) return;
+            // RULE 1 Strict Path: /artifacts/{appId}/public/data/{collectionName}
+            const leaderboardCol = collection(db, 'artifacts', appId, 'public', 'data', 'leaderboard');
+            
+            // RULE 2: No complex queries with orderBy/limit in Firestore. Simple collection fetch + sort in JS!
+            leaderboardUnsubscribe = onSnapshot(leaderboardCol, (snapshot) => {
+                let players = [];
+                snapshot.forEach(docSnap => {
+                    players.push(docSnap.data());
+                });
+
+                // Memory sorting
+                players.sort((a, b) => (b.auraPoints || 0) - (a.auraPoints || 0));
+
+                renderLeaderboardUI(players.slice(0, 10));
+            }, (error) => {
+                console.warn("Leaderboard snapshot error:", error);
+            });
+        }
+
+        function renderLeaderboardUI(topPlayers) {
+            const container = document.getElementById('leaderboard-rows');
+            if (!container) return;
+
+            if (topPlayers.length === 0) {
+                container.innerHTML = `<div class="px-4 py-3 text-center text-slate-500">Chưa có ai trên bảng xếp hạng. Hãy là người đầu tiên!</div>`;
+                return;
+            }
+
+            container.innerHTML = topPlayers.map((p, idx) => {
+                let badge = `#${idx + 1}`;
+                let badgeColor = "text-slate-400 font-bold";
+                if (idx === 0) { badge = "🥇 #1"; badgeColor = "text-amber-400 font-black text-sm"; }
+                else if (idx === 1) { badge = "🥈 #2"; badgeColor = "text-slate-200 font-black text-xs"; }
+                else if (idx === 2) { badge = "🥉 #3"; badgeColor = "text-amber-600 font-black text-xs"; }
+
+                const isSelf = currentUser && currentUser.uid === p.uid;
+                const highlightClass = isSelf ? "bg-purple-950/70 border-l-4 border-cyan-400 font-bold" : "hover:bg-slate-900/60";
+
+                return `
+                    <div class="grid grid-cols-12 px-4 py-3 items-center ${highlightClass} transition">
+                        <div class="col-span-2 text-center ${badgeColor}">${badge}</div>
+                        <div class="col-span-5 flex flex-col">
+                            <span class="text-white text-xs font-bold truncate">${escapeHtml(p.displayName || 'Anh Hùng Vô Danh')} ${isSelf ? '⭐' : ''}</span>
+                            <span class="text-[10px] text-purple-300 font-semibold truncate">${escapeHtml(p.rankName || 'Thằng Nghèo 💸')}</span>
+                        </div>
+                        <div class="col-span-5 text-right font-black text-amber-300 text-xs">
+                            ${(p.auraPoints || 0).toLocaleString()} <span class="text-[9px] text-cyan-300">AP</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+            });
+        }
+
+        let cloudSaveTimeout = null;
+        window.saveScoreToCloudThrottled = function() {
+            if (!db || !currentUser) return;
+
+            clearTimeout(cloudSaveTimeout);
+            cloudSaveTimeout = setTimeout(async () => {
+                try {
+                    const displayName = currentUser.displayName || (currentUser.isAnonymous ? "Khách Bá Khí" : currentUser.email.split('@')[0]);
+                    const currentRank = getCurrentRankObject();
+
+                    // RULE 1 Strict Path for public leaderboard data
+                    const userDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'leaderboard', currentUser.uid);
+                    await setDoc(userDocRef, {
+                        uid: currentUser.uid,
+                        displayName: displayName,
+                        auraPoints: currentAuraPoints,
+                        rankName: currentRank.name,
+                        updatedAt: Date.now()
+                    }, { merge: true });
+                } catch (err) {
+                    console.warn("Error saving score to Firestore:", err);
+                }
+            }, 1000); // 1 second debounce
+        };
+
+        // Initialize Auth on Load
+        initAuth();
+    </script>
+
     <script>
-        // Photo Fallback Error Handler
         function handlePhotoError(imgElement) {
             if (imgElement.src.includes('1000154590_3.jpg')) {
                 imgElement.src = '1000154590.jpg';
@@ -594,7 +919,6 @@
             }
         }
 
-        // Web Audio API Synthesizer with Level-Up Fanfare
         let audioCtx = null;
 
         function playAuraSound(type = 'burst') {
@@ -609,7 +933,6 @@
                 const now = audioCtx.currentTime;
 
                 if (type === 'burst') {
-                    // Quick Punchy Sub Bass + Sine Ping
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'sine';
@@ -622,7 +945,6 @@
                     osc.start(now);
                     osc.stop(now + 0.25);
                 } else if (type === 'quizA' || type === 'choice1') {
-                    // Option A Chime / Choice 1
                     [440, 554.37, 659.25].forEach((freq, index) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
@@ -636,7 +958,6 @@
                         osc.stop(now + index * 0.08 + 0.4);
                     });
                 } else if (type === 'quizB' || type === 'choice2') {
-                    // Ultimate Thunder Sweep
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'sawtooth';
@@ -657,7 +978,6 @@
                     osc.start(now);
                     osc.stop(now + 0.7);
                 } else if (type === 'levelup') {
-                    // Triumphant Level Up Fanfare Arpeggio Chord Sequence
                     const fanfareNotes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98]; // C5, E5, G5, C6, E6, G6
                     fanfareNotes.forEach((freq, index) => {
                         const osc = audioCtx.createOscillator();
@@ -672,12 +992,9 @@
                         osc.stop(now + index * 0.09 + 0.6);
                     });
                 }
-            } catch (e) {
-                // Silent fallback
-            }
+            } catch (e) {}
         }
 
-        // Particle Canvas Logic
         const canvas = document.getElementById('aura-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -765,21 +1082,20 @@
         }
         animateCanvas();
 
-        // EXACT RANK TIERS SYSTEM
         const RANK_TIERS = [
-            { id: 0, min: 1, max: 36000, name: "Thằng Nghèo 💸", color: "text-slate-400", border: "border-slate-600/50" },
-            { id: 1, min: 36000, max: 70000, name: "Thần thái rau má 🌿", color: "text-emerald-400", border: "border-emerald-500/50" },
-            { id: 2, min: 70000, max: 100000, name: "Sắp ngầu rồi 😎", color: "text-amber-400", border: "border-amber-500/50" },
-            { id: 3, min: 100000, max: 160000, name: "Bá khí 🔥", color: "text-orange-400", border: "border-orange-500/50" },
-            { id: 4, min: 160000, max: 250000, name: "Hoàng tử Bá khí 👑", color: "text-yellow-300", border: "border-yellow-400/60" },
-            { id: 5, min: 250000, max: 300000, name: "Vua Bá khí ⚔️", color: "text-red-400", border: "border-red-500/60" },
-            { id: 6, min: 300000, max: 400000, name: "Aura++💀", color: "text-purple-400", border: "border-purple-500/60" },
-            { id: 7, min: 400000, max: 500000, name: "Aura Prime ✨", color: "text-cyan-300", border: "border-cyan-400/60" },
-            { id: 8, min: 500000, max: 700000, name: "Yara yara Aura Prime 🌌", color: "text-fuchsia-400", border: "border-fuchsia-500/60" },
-            { id: 9, min: 700000, max: Infinity, name: "Trần Bình Prime 2019💀", color: "text-rose-500 font-black animate-pulse", border: "border-rose-500/80" }
+            { id: 0, min: 1, max: 36000, name: "Thằng Nghèo 💸", color: "text-slate-400" },
+            { id: 1, min: 36000, max: 70000, name: "Thần thái rau má 🌿", color: "text-emerald-400" },
+            { id: 2, min: 70000, max: 100000, name: "Sắp ngầu rồi 😎", color: "text-amber-400" },
+            { id: 3, min: 100000, max: 160000, name: "Bá khí 🔥", color: "text-orange-400" },
+            { id: 4, min: 160000, max: 250000, name: "Hoàng tử Bá khí 👑", color: "text-yellow-300" },
+            { id: 5, min: 250000, max: 300000, name: "Vua Bá khí ⚔️", color: "text-red-400" },
+            { id: 6, min: 300000, max: 400000, name: "Aura++💀", color: "text-purple-400" },
+            { id: 7, min: 400000, max: 500000, name: "Aura Prime ✨", color: "text-cyan-300" },
+            { id: 8, min: 500000, max: 700000, name: "Yara yara Aura Prime 🌌", color: "text-fuchsia-400" },
+            { id: 9, min: 700000, max: Infinity, name: "Trần Bình Prime 2019💀", color: "text-rose-500 font-black animate-pulse" }
         ];
 
-        let currentAuraPoints = 1; // Starts at 1 ("Thằng Nghèo 💸")
+        let currentAuraPoints = 1;
         let activeRankIndex = 0;
         
         const counterElement = document.getElementById('aura-count');
@@ -788,6 +1104,16 @@
         const rankProgressText = document.getElementById('rank-progress-text');
         const mainCard = document.getElementById('main-card');
         const photoContainer = document.getElementById('photo-container');
+
+        function getCurrentRankObject() {
+            let currentRank = RANK_TIERS[0];
+            for (let i = 0; i < RANK_TIERS.length; i++) {
+                if (currentAuraPoints >= RANK_TIERS[i].min) {
+                    currentRank = RANK_TIERS[i];
+                }
+            }
+            return currentRank;
+        }
 
         function updateRankSystem() {
             let currentRank = RANK_TIERS[0];
@@ -802,17 +1128,14 @@
                 }
             }
 
-            // Check if level-up rank transition happened
             if (newRankIndex > activeRankIndex) {
                 triggerRankLevelUpCelebration(currentRank);
             }
             activeRankIndex = newRankIndex;
 
-            // Update Rank Title & Style
             rankTitleElement.textContent = currentRank.name;
             rankTitleElement.className = `text-xs sm:text-sm font-black transition-all duration-300 ${currentRank.color}`;
             
-            // Update Progress Bar
             if (nextRank && nextRank.max !== Infinity) {
                 const range = currentRank.max - currentRank.min;
                 const currentProgress = currentAuraPoints - currentRank.min;
@@ -824,9 +1147,13 @@
                 rankProgressBar.style.width = `100%`;
                 rankProgressText.textContent = `${currentAuraPoints.toLocaleString()} AP (MAX RANK)`;
             }
+
+            // Sync score to Firestore Cloud
+            if (window.saveScoreToCloudThrottled) {
+                window.saveScoreToCloudThrottled();
+            }
         }
 
-        // LEVEL UP CELEBRATION
         function triggerRankLevelUpCelebration(rankObj) {
             playAuraSound('levelup');
 
@@ -836,12 +1163,10 @@
 
             toast.classList.remove('hidden');
 
-            // Explosive Firework Particles
             for (let i = 0; i < 120; i++) {
                 particles.push(new Particle(window.innerWidth / 2, window.innerHeight / 2, true, 3));
             }
 
-            // Screen Shake
             mainCard.classList.remove('shake-effect', 'mega-shake-effect');
             void mainCard.offsetWidth;
             mainCard.classList.add('mega-shake-effect');
@@ -851,19 +1176,14 @@
             }, 3500);
         }
 
-        // Initialize display
         updateRankSystem();
 
-        // Cooldown Manager (3 Seconds)
         function handleCooldownAction(btnElement, seconds, actionCallback) {
             if (btnElement.classList.contains('btn-cooldown')) return;
 
-            // Trigger the actual action
             actionCallback(window.event);
 
-            // Add cooldown state
             btnElement.classList.add('btn-cooldown');
-            
             const subTextEl = btnElement.querySelector('.btn-sub') || btnElement;
             const originalSubText = subTextEl.innerHTML;
 
@@ -893,38 +1213,30 @@
         function triggerAuraBurst(event, amount = 1) {
             playAuraSound('burst');
 
-            // Update counter
             currentAuraPoints += amount;
             counterElement.textContent = currentAuraPoints.toLocaleString();
 
-            // Update dynamic rank
             updateRankSystem();
 
-            // Counter Bump Effect
             counterElement.classList.remove('counter-bump');
             void counterElement.offsetWidth;
             counterElement.classList.add('counter-bump');
 
-            // Click Position
             const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
             const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
 
-            // Combat Float Text
             createFloatingText(clientX, clientY, amount === 1 ? null : `+${amount.toLocaleString()} AP! 🔥`);
 
-            // Particle Explosion
             const particleCount = amount >= 10000 ? 70 : 25;
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle(clientX, clientY, true, amount >= 10000 ? 2 : 1));
             }
 
-            // Screen Shake Effect
             const shakeClass = amount >= 10000 ? 'mega-shake-effect' : 'shake-effect';
             mainCard.classList.remove('shake-effect', 'mega-shake-effect');
             void mainCard.offsetWidth;
             mainCard.classList.add(shakeClass);
 
-            // Shockwave flash on photo frame
             if (photoContainer) {
                 photoContainer.classList.remove('shockwave-flash');
                 void photoContainer.offsetWidth;
@@ -932,7 +1244,6 @@
             }
         }
 
-        // Interactive Quiz Logic
         function answerQuiz(event, auraBonus, choice) {
             playAuraSound(choice === 'A' ? 'quizA' : 'quizB');
 
@@ -949,7 +1260,6 @@
                 feedbackEl.innerHTML = `<span class="text-amber-300">💀 CHÍNH XÁC! Dương là người được chọn! Thăng cấp siêu tốc <strong class="text-pink-400">+10.000 Aura</strong>! ⚡</span>`;
             }
 
-            // Explosion effect
             const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
             const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
 
@@ -964,7 +1274,6 @@
             createFloatingText(clientX, clientY, `+${auraBonus.toLocaleString()} AP! ⚡`);
         }
 
-        // Story Interaction Choices Logic
         function selectStoryChoice(event, auraBonus, choiceNumber) {
             playAuraSound(choiceNumber === 1 ? 'choice1' : 'choice2');
 
@@ -981,7 +1290,6 @@
                 feedbackEl.innerHTML = `<span class="text-amber-300">👑 TẤT CẢ BÁI PHỤC VUA DƯƠNG BÁ KHÍ! Nhận ngay siêu thưởng <strong class="text-pink-400">+12.300 Aura</strong>! ⚡</span>`;
             }
 
-            // Explosion effect
             const clientX = event ? (event.clientX || window.innerWidth / 2) : window.innerWidth / 2;
             const clientY = event ? (event.clientY || window.innerHeight / 2) : window.innerHeight / 2;
 
