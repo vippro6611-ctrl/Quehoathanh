@@ -7,8 +7,8 @@
   <style>
     :root {
       --bg-gradient: linear-gradient(135deg, #0b0c10, #1f2833, #0b0c10);
-      --card-bg: rgba(31, 40, 51, 0.65);
-      --card-border: rgba(102, 252, 241, 0.2);
+      --card-bg: rgba(31, 40, 51, 0.7);
+      --card-border: rgba(102, 252, 241, 0.25);
       --primary: #66fcf1;
       --primary-hover: #45a29e;
       --accent: #ff007f;
@@ -56,7 +56,7 @@
 
     .container {
       width: 90%;
-      max-width: 800px;
+      max-width: 850px;
       margin: 20px auto;
       z-index: 2;
       display: flex;
@@ -64,24 +64,24 @@
       gap: 20px;
     }
 
-    /* Header Auth Bar */
+    /* Auth Bar Header */
     .auth-bar {
       background: var(--card-bg);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
 
     .auth-buttons button, .btn-action {
       background: linear-gradient(45deg, #45a29e, #66fcf1);
       border: none;
       color: #0b0c10;
-      padding: 8px 16px;
+      padding: 8px 18px;
       font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
@@ -93,16 +93,19 @@
       box-shadow: 0 0 12px var(--primary);
     }
 
-    /* Main Dashboard */
-    .dashboard-card {
+    /* Cards */
+    .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 25px;
-      text-align: center;
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
       position: relative;
+    }
+
+    .dashboard-card {
+      text-align: center;
     }
 
     .aura-title {
@@ -113,7 +116,7 @@
     }
 
     .aura-display {
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       font-weight: 900;
       color: var(--white);
       text-shadow: 0 0 20px var(--primary);
@@ -122,21 +125,22 @@
 
     .rank-badge {
       display: inline-block;
-      padding: 6px 16px;
+      padding: 8px 20px;
       border-radius: 20px;
       background: rgba(255, 0, 127, 0.2);
       border: 1px solid var(--accent);
       color: #ff66b2;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
     }
 
     .progress-container {
       width: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      height: 14px;
-      border-radius: 7px;
+      background: rgba(0, 0, 0, 0.5);
+      height: 16px;
+      border-radius: 8px;
       overflow: hidden;
       margin-bottom: 8px;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -145,54 +149,60 @@
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--primary-hover), var(--primary), var(--accent));
+      background: linear-gradient(90deg, #45a29e, var(--primary), var(--accent));
       transition: width 0.3s ease;
     }
 
     .progress-text {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text);
     }
 
-    /* Clicker Area */
+    /* Main Clicker */
     .clicker-section {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
+      justify-content: center;
+      margin-top: 25px;
     }
 
     .btn-main-click {
-      width: 180px;
-      height: 180px;
+      width: 190px;
+      height: 190px;
       border-radius: 50%;
-      background: radial-gradient(circle, #66fcf1 0%, #1f2833 70%);
+      background: radial-gradient(circle, #66fcf1 0%, #1f2833 75%);
       border: 4px solid var(--primary);
       color: #0b0c10;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 0 30px rgba(102, 252, 241, 0.4);
+      box-shadow: 0 0 35px rgba(102, 252, 241, 0.4);
       transition: transform 0.05s ease, box-shadow 0.2s ease;
     }
 
     .btn-main-click:active {
       transform: scale(0.92);
-      box-shadow: 0 0 50px var(--primary);
+      box-shadow: 0 0 55px var(--primary);
     }
 
-    /* Cooldown Events Section */
-    .events-grid {
+    /* Interactive Sections (Story & Quiz) */
+    .section-title {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grid-options {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 15px;
-      margin-top: 15px;
     }
 
-    .event-card {
-      background: rgba(11, 12, 16, 0.5);
-      border: 1px solid var(--card-border);
+    .option-card {
+      background: rgba(11, 12, 16, 0.6);
+      border: 1px solid rgba(102, 252, 241, 0.15);
       border-radius: 12px;
       padding: 15px;
       display: flex;
@@ -201,7 +211,16 @@
       gap: 10px;
     }
 
-    .event-btn {
+    .option-card h4 {
+      color: var(--white);
+    }
+
+    .option-card p {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .btn-interact {
       background: var(--accent);
       color: white;
       border: none;
@@ -209,23 +228,26 @@
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .event-btn:disabled {
-      background: #555;
+    .btn-interact:hover:not(:disabled) {
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .btn-interact:disabled {
+      background: #444;
       cursor: not-allowed;
       opacity: 0.6;
     }
 
-    /* Leaderboard */
-    .leaderboard-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px;
+    .cooldown-label {
+      font-size: 0.85rem;
+      color: #ff66b2;
+      font-weight: bold;
     }
 
+    /* Leaderboard */
     .leaderboard-title {
       color: var(--primary);
       margin-bottom: 15px;
@@ -238,22 +260,22 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 250px;
+      max-height: 280px;
       overflow-y: auto;
     }
 
     .leaderboard-item {
       display: flex;
       justify-content: space-between;
-      padding: 10px 15px;
+      padding: 12px 16px;
       background: rgba(11, 12, 16, 0.6);
       border-radius: 8px;
       font-size: 0.95rem;
     }
 
-    .leaderboard-item:nth-child(1) { border-left: 4px solid #ffd700; }
-    .leaderboard-item:nth-child(2) { border-left: 4px solid #c0c0c0; }
-    .leaderboard-item:nth-child(3) { border-left: 4px solid #cd7f32; }
+    .leaderboard-item:nth-child(1) { border-left: 4px solid #ffd700; background: rgba(255, 215, 0, 0.1); }
+    .leaderboard-item:nth-child(2) { border-left: 4px solid #c0c0c0; background: rgba(192, 192, 192, 0.1); }
+    .leaderboard-item:nth-child(3) { border-left: 4px solid #cd7f32; background: rgba(205, 127, 50, 0.1); }
 
     /* Footer */
     footer {
@@ -261,20 +283,21 @@
       text-align: center;
       padding: 20px;
       z-index: 2;
-      background: rgba(11, 12, 16, 0.8);
-      border-top: 1px solid rgba(102, 252, 241, 0.1);
+      background: rgba(11, 12, 16, 0.85);
+      border-top: 1px solid rgba(102, 252, 241, 0.15);
+      margin-top: 30px;
     }
 
     .footer-brand {
       color: var(--primary);
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       text-shadow: 0 0 10px var(--primary);
     }
 
     .footer-subtitle {
       color: var(--accent);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       margin-top: 4px;
       font-style: italic;
     }
@@ -341,8 +364,8 @@
     </div>
 
     <!-- Main Game Dashboard -->
-    <div class="dashboard-card">
-      <div class="aura-title">Sức Mạnh Aura</div>
+    <div class="glass-card dashboard-card">
+      <div class="aura-title">Sức Mạnh Aura Bá Khí</div>
       <div class="aura-display" id="auraDisplay">0</div>
       <div class="rank-badge" id="rankBadge">Thằng Nghèo 💸</div>
 
@@ -351,34 +374,55 @@
       </div>
       <div class="progress-text" id="progressText">0 / 100 AP để Thăng Cấp</div>
 
-      <!-- Single Clicker Button -->
+      <!-- Single Main Clicker Button -->
       <div class="clicker-section">
         <button class="btn-main-click" id="btnMainClick">+1 AURA</button>
       </div>
+    </div>
 
-      <!-- 5-Minute Cooldown Events -->
-      <h3 style="margin-top: 25px; color: var(--primary); text-align: left;">Sự Kiện & Thách Thức</h3>
-      <div class="events-grid">
-        <div class="event-card">
-          <h4>Giải Luyện Aura</h4>
-          <p>Nhận ngay +250 AP</p>
-          <button class="event-btn" id="btnEvent1" onclick="triggerEvent(1, 250)">Tham Gia (+250 AP)</button>
-          <small id="cd1" style="color: var(--accent);"></small>
+    <!-- Story Choices (Hành Trình Dương Bá Khí) -->
+    <div class="glass-card">
+      <div class="section-title">📖 Hành Trình Dương Bá Khí (Hồi chiêu 5 phút)</div>
+      <div class="grid-options">
+        <div class="option-card">
+          <h4>Quyết Đấu Luyện Khí</h4>
+          <p>Dương đối đầu cao thủ võ lâm để tích lũy aura chiến đấu.</p>
+          <button class="btn-interact" id="btnStory1" onclick="triggerAction('btnStory1', 'cdStory1', 300)">Khai Mở Aura (+300 AP)</button>
+          <div class="cooldown-label" id="cdStory1"></div>
         </div>
-        <div class="event-card">
-          <h4>Khảo Sát Đạo Tâm</h4>
-          <p>Nhận ngay +500 AP</p>
-          <button class="event-btn" id="btnEvent2" onclick="triggerEvent(2, 500)">Trả Lời (+500 AP)</button>
-          <small id="cd2" style="color: var(--accent);"></small>
+        <div class="option-card">
+          <h4>Đột Phá Cảnh Giới</h4>
+          <p>Bế quan tu luyện, hấp thụ linh khí đất trời.</p>
+          <button class="btn-interact" id="btnStory2" onclick="triggerAction('btnStory2', 'cdStory2', 500)">Lĩnh Hội (+500 AP)</button>
+          <div class="cooldown-label" id="cdStory2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Challenges (Đố Vui Bá Khí) -->
+    <div class="glass-card">
+      <div class="section-title">❓ Đố Vui Bá Khí (Hồi chiêu 5 phút)</div>
+      <div class="grid-options">
+        <div class="option-card">
+          <h4>Thách Thức Đạo Tâm</h4>
+          <p>Trả lời câu hỏi về huyền thoại Bá Khí của Dương.</p>
+          <button class="btn-interact" id="btnQuiz1" onclick="triggerAction('btnQuiz1', 'cdQuiz1', 400)">Giải Đố (+400 AP)</button>
+          <div class="cooldown-label" id="cdQuiz1"></div>
+        </div>
+        <div class="option-card">
+          <h4>Vận Công Khảo Nghiệm</h4>
+          <p>Thử thách tốc độ phản xạ nhận điểm thưởng lớn.</p>
+          <button class="btn-interact" id="btnQuiz2" onclick="triggerAction('btnQuiz2', 'cdQuiz2', 600)">Khảo Nghiệm (+600 AP)</button>
+          <div class="cooldown-label" id="cdQuiz2"></div>
         </div>
       </div>
     </div>
 
     <!-- Realtime Leaderboard -->
-    <div class="leaderboard-card">
+    <div class="glass-card">
       <div class="leaderboard-title">🏆 Bảng Xếp Hạng Bá Khí Global</div>
       <ul class="leaderboard-list" id="leaderboardList">
-        <li style="text-align: center; padding: 10px;">Đang tải bảng xếp hạng...</li>
+        <li style="text-align: center; padding: 10px;">Đang tải dữ liệu realtime...</li>
       </ul>
     </div>
   </div>
@@ -401,7 +445,7 @@
     </div>
   </div>
 
-  <!-- Firebase Scripts -->
+  <!-- Firebase JavaScript SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
@@ -423,7 +467,7 @@
       limit 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // Firebase Credentials
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyAJMqGogLpTxIzkVl4ueKHHoEPoQhtsMS4",
       authDomain: "duong-603a4.firebaseapp.com",
@@ -438,7 +482,7 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // 10-Tier Rank System
+    // 10 Ranks
     const RANKS = [
       { name: "Thằng Nghèo 💸", min: 0 },
       { name: "Dân Thường 🎒", min: 100 },
@@ -459,11 +503,6 @@
     let syncTimer = null;
     let isRegisterMode = false;
 
-    // Cooldown State (5 minutes = 300 seconds)
-    const COOLDOWN_TIME = 300; 
-    let cdTimer1 = null;
-    let cdTimer2 = null;
-
     // Elements
     const auraDisplay = document.getElementById('auraDisplay');
     const rankBadge = document.getElementById('rankBadge');
@@ -474,16 +513,16 @@
     const btnLogout = document.getElementById('btnLogout');
     const leaderboardList = document.getElementById('leaderboardList');
 
-    // Web Audio Sound Engine
+    // Audio Engine
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playClickSound() {
       if (audioCtx.state === 'suspended') audioCtx.resume();
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(850, audioCtx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
       gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -491,7 +530,7 @@
       osc.stop(audioCtx.currentTime + 0.05);
     }
 
-    // Rank Calculation & UI Update
+    // UI Updates
     function updateUI() {
       auraDisplay.innerText = auraPoints.toLocaleString();
 
@@ -516,16 +555,13 @@
         progressText.innerText = `${auraPoints.toLocaleString()} / ${nextRank.min.toLocaleString()} AP để Thăng Cấp`;
       } else {
         progressBar.style.width = "100%";
-        progressText.innerText = "Đã đạt cấp độ Tối Cao!";
+        progressText.innerText = "Đã đạt đẳng cấp Tối Cao!";
       }
     }
 
-    // Cloud Firestore Sync (Debounced)
+    // Cloud Firestore Sync (Ghi điểm độc lập theo UID)
     function savePointsToCloud() {
       if (!currentUser || !isSyncInitialized) return;
-      
-      // Save locally per UID to isolate user data
-      localStorage.setItem(`aura_${currentUser.uid}`, auraPoints);
 
       clearTimeout(syncTimer);
       syncTimer = setTimeout(async () => {
@@ -536,12 +572,12 @@
             updatedAt: Date.now()
           }, { merge: true });
         } catch (e) {
-          console.error("Firestore sync error:", e);
+          console.error("Lỗi đồng bộ Firestore:", e);
         }
       }, 500);
     }
 
-    // Add Points Action
+    // Tăng Aura
     function addAura(amount, e) {
       auraPoints += amount;
       updateUI();
@@ -562,30 +598,37 @@
 
     document.getElementById('btnMainClick').addEventListener('click', (e) => addAura(1, e));
 
-    // Event Cooldown System (5 mins = 300s)
-    window.triggerEvent = function(eventId, reward) {
-      const btn = document.getElementById(`btnEvent${eventId}`);
-      const label = document.getElementById(`cd${eventId}`);
-      
+    // Hồi chiêu 5 phút (300 giây) cho các hành động
+    window.triggerAction = function(buttonId, labelId, reward) {
+      const btn = document.getElementById(buttonId);
+      const label = document.getElementById(labelId);
+      if (!btn || btn.disabled) return;
+
       addAura(reward, null);
       btn.disabled = true;
 
-      let remaining = COOLDOWN_TIME;
-      const interval = setInterval(() => {
-        remaining--;
+      let remaining = 300; // 5 phút = 300s
+      const updateTimer = () => {
         const mins = Math.floor(remaining / 60);
         const secs = remaining % 60;
-        label.innerText = `⏳ Hồi chiêu: ${mins}m ${secs}s`;
+        const formattedSecs = secs < 10 ? `0${secs}` : secs;
+        label.innerText = `⏳ Hồi chiêu: ${mins}p ${formattedSecs}s`;
+      };
 
+      updateTimer();
+      const interval = setInterval(() => {
+        remaining--;
         if (remaining <= 0) {
           clearInterval(interval);
           btn.disabled = false;
-          label.innerText = "";
+          label.innerText = '';
+        } else {
+          updateTimer();
         }
       }, 1000);
     };
 
-    // Global Leaderboard Stream
+    // Lắng nghe Bảng Xếp Hạng Realtime
     function listenLeaderboard() {
       const q = query(collection(db, "leaderboard"), orderBy("auraPoints", "desc"), limit(20));
       onSnapshot(q, (snapshot) => {
@@ -605,39 +648,45 @@
       });
     }
 
-    // Auth State Handler (Crucial fix for point inheritance on new login)
+    // Xử Lý Đăng Nhập / Đăng Xuất (Sửa lỗi đè điểm tài khoản mới)
     onAuthStateChanged(auth, async (user) => {
+      isSyncInitialized = false; // Khóa đồng bộ tạm thời
+
       if (user) {
         currentUser = user;
         userStatus.innerText = `👤 ${user.email.split('@')[0]}`;
         btnLoginModal.style.display = "none";
         btnLogout.style.display = "block";
 
-        // Read user's isolated score from Firestore
-        const userDocRef = doc(db, "leaderboard", user.uid);
-        const docSnap = await getDoc(userDocRef);
+        try {
+          const userDocRef = doc(db, "leaderboard", user.uid);
+          const docSnap = await getDoc(userDocRef);
 
-        if (docSnap.exists()) {
-          auraPoints = docSnap.data().auraPoints || 0;
-        } else {
-          // BRAND NEW ACCOUNT: Reset to 0 explicitly
-          auraPoints = 0;
-          await setDoc(userDocRef, {
-            email: user.email.split('@')[0],
-            auraPoints: 0,
-            updatedAt: Date.now()
-          });
+          if (docSnap.exists()) {
+            // Tải đúng số điểm của tài khoản từ Cloud
+            auraPoints = docSnap.data().auraPoints || 0;
+          } else {
+            // TÀI KHOẢN MỚI: Đặt về 0 Aura tuyệt đối
+            auraPoints = 0;
+            await setDoc(userDocRef, {
+              email: user.email.split('@')[0],
+              auraPoints: 0,
+              updatedAt: Date.now()
+            });
+          }
+        } catch (e) {
+          console.error("Lỗi tải điểm user:", e);
+        } finally {
+          isSyncInitialized = true; // Mở lại quyền đồng bộ
+          updateUI();
         }
-
-        isSyncInitialized = true;
-        updateUI();
       } else {
         currentUser = null;
         userStatus.innerText = "Khách (Chưa đăng nhập)";
         btnLoginModal.style.display = "block";
         btnLogout.style.display = "none";
         
-        // Reset points for guest / logout
+        // Reset về 0 khi đăng xuất
         auraPoints = 0;
         isSyncInitialized = false;
         updateUI();
@@ -664,13 +713,13 @@
       try {
         if (isRegisterMode) {
           await createUserWithEmailAndPassword(auth, email, pass);
-          alert("Đăng ký thành công!");
+          alert("Đăng ký tài khoản thành công!");
         } else {
           await signInWithEmailAndPassword(auth, email, pass);
         }
         modal.style.display = "none";
       } catch (err) {
-        alert("Lỗi: " + err.message);
+        alert("Thao tác thất bại: " + err.message);
       }
     };
 
@@ -679,7 +728,7 @@
       alert("Đã đăng xuất!");
     };
 
-    // Canvas Background Animation
+    // Canvas Background
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -702,7 +751,7 @@
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(102, 252, 241, 0.3)";
+      ctx.fillStyle = "rgba(102, 252, 241, 0.35)";
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -714,7 +763,7 @@
     }
     animateParticles();
 
-    // Start Leaderboard Realtime Listener
+    // Khởi động Bảng Xếp Hạng Realtime
     listenLeaderboard();
   </script>
 </body>
